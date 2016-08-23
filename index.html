@@ -34,17 +34,28 @@
 
 <div ng-app="myApp" ng-controller="myCtrl">
   <form class="w3-container">
+    <h3  id = "calculo">Função:</h3>
+    <input id="eq" class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
+    <br><br>
+    Valor de x:
+    <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
+    <br>
+    <p><a href="#yo" class="w3-btn w3-teal" ng-click = "calcular()">Calcular</p></a>
+    <br>
+    <div class="w3-card-4 space"><p><strong>f(x)= </strong> {{resultado}}</p>
+      <h1>Gráfico:</h1>
+      <div id="plot"></div>
+    </div>
+    <br><br>
+  <a href="#calculo" class="w3-btn w3-teal">Voltar</a>
+  <br><br><br><br><br>
+  <div id = "yo">
 
-  <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
-  <br><br>
-
-  <input class="w3-input w3-border w3-animate-input" ng-change="calcular()" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
-
-  {{resultado}}
-</div>
-
-<script src = "mat.js"></script>
-
+  </div>
+  <script src = "mat.js"></script>
 </form>
+
+</div>
+<script src = "mat.js"></script>
 </body>
 </html>
