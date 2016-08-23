@@ -21,44 +21,40 @@
   <link rel="stylesheet" href="w3.css">
 </head>
 <body>
-  <section class="page-header">
-    <h1 class="project-name">Teste-math</h1>
+  <header  id="calculo" class="w3-container w3-blue">
+    <h1 align="center" ><strong>Esboço para Métodos Numéricos Computacionais</strong></h1>
     <h2 class="project-tagline"></h2>
-    <a href="https://github.com/luisuzai/teste-math" class="btn">View on GitHub</a>
-    <a href="https://github.com/luisuzai/teste-math/zipball/master" class="btn">Download .zip</a>
-    <a href="https://github.com/luisuzai/teste-math/tarball/master" class="btn">Download .tar.gz</a>
-  </section>
-<!-- <div class="" ng-app="myApp" ng-controller="myCtrl" ng-init = "resultado = 1">
-<form class="w3-container">
+    <div align = "center" class="">
+      <a href="https://github.com/luisuzai/teste-math" class="btn">View on GitHub</a>
+      <a href="https://github.com/luisuzai/teste-math/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/luisuzai/teste-math/tarball/master" class="btn">Download .tar.gz</a>
+      <a href="#yo" class="btn"> Calcula</a>
+    </div>
+  </header>
 
-<input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
-<br><br>
 
-<input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form class="w3-container">
+      <h3 >Função:</h3>
+      <input id="eq" class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
+      <br><br>
+      Valor de x:
+      <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
+      <br>
+      <p><a href="#yo" class="w3-btn w3-teal" ng-click = "calcular()">Calcular</p></a>
+      <br>
+      <div class="w3-card-4 space"><p><strong>f(x)= </strong> {{resultado}}</p>
+        <h1>Gráfico:</h1>
+        <div id="plot"></div>
+      </div>
+      <br><br>
+    <a href="#calculo" class="w3-btn w3-teal">Voltar</a>
+    </div>
+    <br><br><br>
+    <div id = "yo">
 
-{{resultado}}
-</div>
-
-<script>
-  var app = angular.module('myApp', []);
-  app.controller('myCtrl', function($scope) {
-    $scope.resultado = math.eval($scope.expression.value,{$scope.x: Number($scope.x)});
-  });
-</script> -->
-
-<div ng-app="myApp" ng-controller="myCtrl">
-  <form class="w3-container">
-
-  <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
-  <br><br>
-
-  <input class="w3-input w3-border w3-animate-input" ng-change="calcular()" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
-
-  {{resultado}}
-</div>
-
-<script src = "mat.js"></script>
-
-</form>
+    </div>
+    <script src = "mat.js"></script>
+  </form>
 </body>
 </html>

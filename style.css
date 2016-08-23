@@ -12,3 +12,6 @@ body, html, input {
 form {
   margin: 20px 0;
 }
+.space{
+  padding: 10px;
+}
