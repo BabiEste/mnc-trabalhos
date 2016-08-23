@@ -38,7 +38,7 @@
   <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
   <br><br>
 
-  <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
+  <input class="w3-input w3-border w3-animate-input" ng-change="calcular()" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
 
   {{resultado}}
 </div>
