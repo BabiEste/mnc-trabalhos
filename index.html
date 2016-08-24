@@ -2,33 +2,24 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Trabalho Sacoman</title>
+  <title>Derivadas</title>
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  <!-- SCRIPTS -->
+  <script src="./js/angular/angular.min.js"></script>
+  <script src="./js/math/math.min.js"></script>
+  <script src="./js/math/d3.min.js"></script>
+  <script src="./js/math/function-plot@1.14.0"></script>
 
-  <script src="angular.min.js"></script>
-  <script src="math.min.js"></script>
+  <!-- STYLES -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/w3.css">
 
-  <!-- load http://maurizzzio.github.io/function-plot/ -->
-  <script src="d3.min.js"></script>
-  <script src="function-plot@1.14.0"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="w3.css">
 </head>
 <body>
   <header  id="calculo" class="w3-container w3-blue">
-    <h1 align="center" ><strong>Esboço para Métodos Numéricos Computacionais</strong></h1>
-    <h2 class="project-tagline"></h2>
-    <div align = "center" class="">
-      <a href="https://github.com/luisuzai/teste-math" class="btn">View on GitHub</a>
-      <a href="https://github.com/luisuzai/teste-math/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/luisuzai/teste-math/tarball/master" class="btn">Download .tar.gz</a>
-    </div>
+    <h1 align="center" ><strong>Derivadas</strong></h1>
   </header>
 
 
@@ -36,24 +27,29 @@
     <form class="w3-container">
       <h3 >Função:</h3>
       <input id="eq" class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
-      <br><br>
-      Valor de x:
+      <br>
+      <h3>Valor de x:</h3>
       <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
       <br>
-      <p><a href="#yo" class="w3-btn w3-teal" ng-click = "calcular()">Calcular</p></a>
+      <h3>Valor de ε:</h3>
+      <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Digite o ε" style="width:30%" ng-model = "ep">
       <br>
-      <div class="w3-card-4 space"><p><strong>f(x)= </strong> {{resultado}}</p>
-        <h1>Gráfico:</h1>
-        <div id="plot"></div>
+      <p><a href="#yo" class="w3-btn w3-teal" ng-click = "calcular()">Calcular</a></p>
+      <br>
+      <div class="w3-card-4 space"><p><strong>f'(x)= </strong> {{resultado}}</p>
+        <!-- <h1>Gráfico:</h1>
+        <div id="plot"></div> -->
       </div>
       <br><br>
-    <a href="#calculo" class="w3-btn w3-teal">Voltar</a>
-    </div>
-    <br><br><br>
-    <div id = "yo">
+      <a href="#calculo" class="w3-btn w3-teal">Voltar</a>
 
-    </div>
-    <script src = "mat.js"></script>
-  </form>
+      <br><br><br>
+      <div id = "yo">
+
+      </div>
+
+    </form>
+  </div>
+  <script src = "./js/derivada.js"></script>
 </body>
 </html>
