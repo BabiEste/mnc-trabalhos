@@ -3,6 +3,7 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
   $scope.expression = '';
   $scope.x = '';
+  $scope.ep = '';
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;
     // $scope.resultado = math.eval($scope.expression,{x: Number($scope.x)});
@@ -17,16 +18,17 @@ app.controller('myCtrl', function($scope) {
     // $scope.Auxiliar2 = $scope.calcular(xFuncao - Number($scope.h));
     // $scope.ResultadoDerivadaSegunda = (Number($scope.h) - Number($scope.h))/ (2*h);
     $scope.h = ($scope.h) / 2;
-    if($scope.ep > 0.1 || $scope.ep <= 0){
+    if($scope.ep > 0.1 || $scope.ep <= 0 || $scope.ep === ''){
       $scope.ep = '';
+      $scope.mostra = false;
       alert("Digite um número válido para o ε");
       return "";
     }
     // derivada primeira
     do{
 
-    $scope.x1 = Number($scope.x) + Number($scope.h);
-    $scope.x2 = Number($scope.x) - Number($scope.h);
+      $scope.x1 = Number($scope.x) + Number($scope.h);
+      $scope.x2 = Number($scope.x) - Number($scope.h);
       $scope.q = $scope.p;
       try {
         $scope.resultado1 = math.eval($scope.expression,{x: Number($scope.x1)});
@@ -36,7 +38,7 @@ app.controller('myCtrl', function($scope) {
         alert(err);
       }
       try {
-       $scope.resultado2 = math.eval($scope.expression,{x: Number($scope.x2)});
+        $scope.resultado2 = math.eval($scope.expression,{x: Number($scope.x2)});
       }
       catch (err) {
         console.log(err);
@@ -117,21 +119,21 @@ app.controller('myCtrl', function($scope) {
         alert(err);
       }
       try {
-       $scope.resultado2 = math.eval($scope.expression,{x: Number($scope.x2)});
+        $scope.resultado2 = math.eval($scope.expression,{x: Number($scope.x2)});
       }
       catch (err) {
         console.log(err);
         alert(err);
       }
       try {
-       $scope.resultado3 = 2*math.eval($scope.expression,{x: Number($scope.x)});
+        $scope.resultado3 = 2*math.eval($scope.expression,{x: Number($scope.x)});
       }
       catch (err) {
         console.log(err);
         alert(err);
       }
       try {
-      $scope.p = (($scope.resultado1)-($scope.resultado3) + ($scope.resultado2))/(4*$scope.h*$scope.h);
+        $scope.p = (($scope.resultado1)-($scope.resultado3) + ($scope.resultado2))/(4*$scope.h*$scope.h);
       }
       catch (err) {
         console.log(err);
@@ -157,5 +159,9 @@ app.controller('myCtrl', function($scope) {
 
 
 
+  };
+  $scope.verificaEp = function(){
+    if($scope.ep === "")
+      $scope.mostra=false;
   };
 });

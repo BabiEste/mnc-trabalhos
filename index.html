@@ -55,11 +55,11 @@
       <h3>Valor de ε:</h3>
       <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Digite o ε" style="width:30%" ng-model = "ep">
       <br>
-      <p><a href="#yo" class="btn btn-primary" ng-click = "resultado = calcular(x);DerivadaSegunda = segunda(x)">Calcular   </a>
-          <a class="btn btn-primary" ng-click = "x='';expression='';ep=''; resultado='';DerivadaSegunda=''">Limpa</a>
+      <p><a href="#yo" class="btn btn-primary" ng-click = "  resultado = calcular(x);DerivadaSegunda = segunda(x); mostra=true; verificaEp()">Calcular   </a>
+          <a class="btn btn-primary" ng-click = "x='';expression='';ep=''; resultado='';DerivadaSegunda=''; mostra=false">Limpa</a>
       </p>
       <br>
-      <div class="w3-card-4 space">
+      <div class="w3-card-4 space" ng-show = "mostra" ng-hide="!mostra">
         <p><strong>f'(x)= </strong> {{resultado | limitTo:10}}</p>
         <p><strong>f''(x)= </strong> {{DerivadaSegunda | limitTo:10}}</p>
         <!-- <h1>Gráfico:</h1>
