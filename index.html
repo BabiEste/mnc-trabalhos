@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Derivadas</title>
-
+  <link rel="icon" type="image/png" href="./img/x.png" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- SCRIPTS -->
@@ -11,17 +11,37 @@
   <script src="./js/math/math.min.js"></script>
   <script src="./js/math/d3.min.js"></script>
   <script src="./js/math/function-plot@1.14.0"></script>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
 
   <!-- STYLES -->
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/w3.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
 
 </head>
 <body>
-  <header  id="calculo" class="w3-container w3-blue">
-    <h1 align="center" ><strong>Derivadas</strong></h1>
-  </header>
-
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#index.html">Trabalho de MNC</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#index.html">Derivadas</a></li>
+          <li><a href="#">Desativada</a></li>
+          <li><a href="#">Desativada</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br><br>
 
   <div ng-app="myApp" ng-controller="myCtrl">
     <form class="w3-container">
@@ -34,7 +54,7 @@
       <h3>Valor de ε:</h3>
       <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Digite o ε" style="width:30%" ng-model = "ep">
       <br>
-      <p><a href="#yo" class="w3-btn w3-teal" ng-click = "resultado = calcular(x);DerivadaSegunda = segunda(x)">Calcular</a></p>
+      <p><a href="#yo" class="btn btn-primary" ng-click = "resultado = calcular(x);DerivadaSegunda = segunda(x)">Calcular</a></p>
       <br>
       <div class="w3-card-4 space">
         <p><strong>f'(x)= </strong> {{resultado}}</p>
@@ -43,7 +63,7 @@
         <div id="plot"></div> -->
       </div>
       <br><br>
-      <a href="#calculo" class="w3-btn w3-teal">Voltar</a>
+      <a href="#calculo" class="btn btn-primary">Voltar</a>
 
       <br><br><br>
       <div id = "yo">
