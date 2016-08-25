@@ -17,7 +17,11 @@ app.controller('myCtrl', function($scope) {
     // $scope.Auxiliar2 = $scope.calcular(xFuncao - Number($scope.h));
     // $scope.ResultadoDerivadaSegunda = (Number($scope.h) - Number($scope.h))/ (2*h);
     $scope.h = ($scope.h) / 2;
-
+    if($scope.ep > 0.1 || $scope.ep <= 0){
+      $scope.ep = '';
+      alert("Digite um número válido para o ε");
+      return "";
+    }
     // derivada primeira
     do{
 
@@ -96,8 +100,10 @@ app.controller('myCtrl', function($scope) {
     // $scope.Auxiliar2 = $scope.calcular(xFuncao - Number($scope.h));
     // $scope.ResultadoDerivadaSegunda = (Number($scope.h) - Number($scope.h))/ (2*h);
     $scope.h = ($scope.h) / 2;
-
-
+    if($scope.ep > 0.1 || $scope.ep <= 0){
+      $scope.ep = '';
+      return "";
+    }
     do{
 
       $scope.x1 = Number($scope.x) + 2*Number($scope.h);
