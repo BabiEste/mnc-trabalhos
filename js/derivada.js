@@ -20,6 +20,13 @@ app.controller('myCtrl', function($scope) {
     }
     try {
       $scope.x1 = Number($scope.x) + Number($scope.h);
+      if(isNaN($scope.x1)){
+        alert("Digite um número válido para o x");
+        $scope.expression = '';
+        $scope.x = '';
+        $scope.ep = '';
+        return "";
+      }
     }
     catch (err) {
       console.log(err);
@@ -31,6 +38,14 @@ app.controller('myCtrl', function($scope) {
     }
     try {
       $scope.x2 = Number($scope.x) - Number($scope.h);
+      if(isNaN($scope.x2)){
+        alert("Digite um número válido para o x");
+        $scope.expression = '';
+        $scope.x = '';
+        $scope.ep = '';
+        return "";
+      }
+
     }
     catch (err) {
       console.log(err);
