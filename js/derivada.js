@@ -13,36 +13,39 @@ app.controller('myCtrl', function($scope) {
     catch (err) {
       console.log(err);
       alert(err);
-      $scope.expression = '';
-      $scope.x = '';
       $scope.ep = '';
       return "";
     }
     try {
       $scope.x1 = Number($scope.x) + Number($scope.h);
-      if(isNaN($scope.x1)){
-        alert("Digite um número válido para o x");
-        $scope.expression = '';
+      if(isNaN($scope.ep) && isNaN($scope.x)){
+        alert("Digite um número válido para o x e para o ε");
         $scope.x = '';
         $scope.ep = '';
+        return "";
+      }
+      if(isNaN($scope.ep)){
+          alert("Digite um número válido para o ε");
+          $scope.ep = '';
+          return "";
+      }
+      if(isNaN($scope.x1)){
+        alert("Digite um número válido para o x");
+        $scope.x = '';
         return "";
       }
     }
     catch (err) {
       console.log(err);
       alert(err);
-      $scope.expression = '';
       $scope.x = '';
-      $scope.ep = '';
       return "";
     }
     try {
       $scope.x2 = Number($scope.x) - Number($scope.h);
       if(isNaN($scope.x2)){
         alert("Digite um número válido para o x");
-        $scope.expression = '';
         $scope.x = '';
-        $scope.ep = '';
         return "";
       }
 
@@ -50,9 +53,7 @@ app.controller('myCtrl', function($scope) {
     catch (err) {
       console.log(err);
       alert(err);
-      $scope.expression = '';
       $scope.x = '';
-      $scope.ep = '';
       return "";
     }
     try {
@@ -62,8 +63,6 @@ app.controller('myCtrl', function($scope) {
       console.log(err);
       alert(err);
       $scope.expression = '';
-      $scope.x = '';
-      $scope.ep = '';
       return "";
     }
     try {
@@ -73,8 +72,6 @@ app.controller('myCtrl', function($scope) {
       console.log(err);
       alert(err);
       $scope.expression = '';
-      $scope.x = '';
-      $scope.ep = '';
       return "";
     }
     try {
@@ -84,8 +81,6 @@ app.controller('myCtrl', function($scope) {
       console.log(err);
       alert(err);
       $scope.expression = '';
-      $scope.x = '';
-      $scope.ep = '';
       return "";
     }
     try {
@@ -110,7 +105,7 @@ app.controller('myCtrl', function($scope) {
       $scope.ep = '';
       return "";
     }
-    if($scope.ep > 0.1 || $scope.ep <= 0 || $scope.ep === ''){
+    if($scope.ep > 0.1 || $scope.ep <= 0 || $scope.ep === '' || isNaN($scope.ep)){
       $scope.ep = '';
       $scope.mostra = false;
       alert("Digite um número válido para o ε");
@@ -178,13 +173,10 @@ app.controller('myCtrl', function($scope) {
         return "";
       }
     }while(Math.abs($scope.resultadoFalso) > $scope.ep);
-    // $scope.resultado = $scope.p;
     return $scope.p;
-    // do{
-    //
-    //
-    // }while(Math.abs($scope.resultadoFalso) > $scope.ep);
-    // $scope.resultadoOrdemDois = $scope.p;
+
+
+    //DESENHA O GRÁFICO
     // try {
     //   functionPlot({
     //     target: '#plot',
@@ -210,9 +202,6 @@ app.controller('myCtrl', function($scope) {
     $scope.resultado3 = 2*math.eval($scope.expression,{x: Number($scope.x)});
     $scope.p = (($scope.resultado1)-($scope.resultado3) + ($scope.resultado2))/(4*$scope.h*$scope.h);
     $scope.q = $scope.p;
-    // $scope.Auxiliar1 = $scope.calcular(xFuncao + Number($scope.h));
-    // $scope.Auxiliar2 = $scope.calcular(xFuncao - Number($scope.h));
-    // $scope.ResultadoDerivadaSegunda = (Number($scope.h) - Number($scope.h))/ (2*h);
     $scope.h = ($scope.h) / 2;
     if($scope.ep > 0.1 || $scope.ep <= 0){
       $scope.ep = '';
@@ -266,14 +255,12 @@ app.controller('myCtrl', function($scope) {
         alert(err);
       }
     }while(Math.abs($scope.resultadoFalso) > $scope.ep);
-    // $scope.resultado = $scope.p;
     return $scope.p;
-
-
-
   };
   $scope.verificaEp = function(){
-    if($scope.ep === "")
+    if($scope.ep === "" || $scope.x ==="" || $scope.expression === "")
     $scope.mostra=false;
+    if(isNaN($scope.ep))
+    $scope.ep = "";
   };
 });
