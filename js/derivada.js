@@ -173,24 +173,25 @@ app.controller('myCtrl', function($scope) {
         return "";
       }
     }while(Math.abs($scope.resultadoFalso) > $scope.ep);
-    return $scope.p;
+    // return $scope.p;
 
 
-    //DESENHA O GRÁFICO
-    // try {
-    //   functionPlot({
-    //     target: '#plot',
-    //     data: [{
-    //       fn: $scope.expression,
-    //       sampler: 'builtIn',  // this will make function-plot use the evaluator of math.js
-    //       graphType: 'polyline'
-    //     }]
-    //   });
-    // }
-    // catch (err) {
-    //   console.log(err);
-    //   alert(err);
-    // }
+    // DESENHA O GRÁFICO
+    try {
+      functionPlot({
+        target: '#plot',
+        data: [{
+          fn: $scope.expression,
+          sampler: 'builtIn',  // this will make function-plot use the evaluator of math.js
+          graphType: 'polyline'
+        }]
+      });
+    }
+    catch (err) {
+      console.log(err);
+      alert(err);
+    }
+      return $scope.p;
   };
 
   $scope.segunda = function(xFuncao){
