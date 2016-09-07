@@ -6,7 +6,7 @@ app.controller('myCtrl', function($scope) {
   $scope.ep = '';
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;
-    // $scope.resultado = math.eval($scope.expression,{x: Number($scope.x)});
+    $scope.resultadoFuncao = math.eval($scope.expression,{x: Number($scope.x)});
     try {
       $scope.h = 1000*$scope.ep;
     }
