@@ -1,45 +1,119 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Raizes</title>
-    <link rel="icon" type="image/png" href="../img/x.png" />
+<head>
+  <meta charset="utf-8">
+  <title>Raizes</title>
+  <link rel="icon" type="image/png" href="../img/x.png" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- SCRIPTS -->
-    <script src="../js/angular/angular.min.js"></script>
-    <script src="../js/math/math.min.js"></script>
-    <script src="../js/math/d3.min.js"></script>
-    <script src="../js/math/function-plot@1.14.0"></script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- SCRIPTS -->
+  <script src="../js/angular/angular.min.js"></script>
+  <script src="../js/math/math.min.js"></script>
+  <script src="../js/math/d3.min.js"></script>
+  <script src="../js/math/function-plot@1.14.0"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 
-    <!-- STYLES -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/w3.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <!-- STYLES -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/w3.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
 
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid ">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="../index.html">Derivadas</a></li>            
-            <li class="active"><a href="./templates/raizes.html">Raizes</a></li>
-            <li><a href="./templates/sistemasLineares.html">Sistemas Lineares</a></li>
-          </ul>
-        </div>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
       </div>
-    </nav>
-    <br><br>
-  </body>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.html">Derivadas</a></li>
+          <li class="active"><a href="raizes.html">Raizes</a></li>
+          <li><a href="sistemasLineares.html">Sistemas Lineares</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+  <div ng-app="" ng-controller="">
+    <form class="w3-container">
+      <div class="">
+        <h2>Função, intervalo de busca e passos para separar o intervalo com indício de conter as raízes </h2>
+        <!-- <h3 >Função:</h3> -->
+        <input id="eq" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
+        <br>
+        <!-- <h3>Valor de x:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Intervalo a"  ng-model = "a">
+        <br>
+        <!-- <h3>Valor de x:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Intervalo b"  ng-model = "b">
+        <br>
+        <!-- <h3>Valor de ε:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Digite o Δ" ng-model = "delta">
+        <br>
+        <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
+          <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
+          <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
+        </p>
+        <br>
+      </div>
+    </form>
+    <!-- <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
+    <h1>Gráfico de f(x)</h1>
+    <div id="plot"></div>
+  </div> -->
+
+  <form class="w3-container">
+    <div class="">
+      <h2>Função, intervalo de busca e precisão para calcular raiz no intervalo </h2>
+      <!-- <h3 >Função:</h3> -->
+      <input id="" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Intervalo a"  ng-model = "a">
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Intervalo b"  ng-model = "b">
+      <br>
+      <!-- <h3>Valor de ε:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "ep">
+      <br>
+      <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
+        <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
+        <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
+      </p>
+      <br>
+      <h2>Métodos disponíveis</h2>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Busca Uniforme</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Método das cordas</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Método de Newton</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Método da Bisseção</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Método das cordas modificado</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Método de Newton modificado</strong></label>
+
+      <h2>Opções de apresentação</h2>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Iterações</strong></label>
+      <label class="checkbox-inline"><input type="checkbox"><strong>Gráfico</strong></label>
+
+      <br><br>
+      <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
+        <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
+      </p>
+      <h2>Solução:</h2>
+      <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
+        <p><strong>x= </strong> </p>
+        <p><strong>f(x)= </strong> </p>
+        <!-- <h1>Gráfico de f(x)</h1>
+        <div id="plot"></div> -->
+      </div>
+    </div>
+  </form>
+</div>
+</body>
 </html>
