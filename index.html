@@ -34,8 +34,8 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.html">Derivadas</a></li>
+          <li><a href="./templates/raizes.html">Raizes</a></li>
           <li><a href="./templates/sistemasLineares.html">Sistemas Lineares</a></li>
-          <li><a href="#">Desativada</a></li>
         </ul>
       </div>
     </div>
@@ -44,28 +44,93 @@
 
   <div ng-app="myApp" ng-controller="myCtrl">
     <form class="w3-container">
-      <h3 >Função:</h3>
-      <input id="eq" class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua função" style="width:30%" ng-model = "expression">
-      <br>
-      <h3>Valor de x:</h3>
-      <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Sua variável x" style="width:30%" ng-model = "x">
-      <br>
-      <h3>Valor de ε:</h3>
-      <input class="w3-input w3-border w3-animate-input" type="text" placeholder="Digite o ε" style="width:30%" ng-model = "ep">
-      <br>
-      <p><a class="btn btn-primary" ng-click = "  resultado = calcular(x);DerivadaSegunda = segunda(x); mostra=true; verificaEp()">Calcular   </a>
+      <div class="">
+        <h2>Função Real com uma variável e f: R→R </h2>
+        <!-- <h3 >Função:</h3> -->
+        <input id="eq" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
+        <br>
+        <!-- <h3>Valor de x:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Sua variável x"  ng-model = "x">
+        <br>
+        <!-- <h3>Valor de ε:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "ep">
+        <br>
+        <p><a class="btn btn-primary" ng-click = "  resultado = calcular(x);DerivadaSegunda = segunda(x); mostra=true; verificaEp()">Calcular   </a>
           <a class="btn btn-primary" ng-click = "x='';expression='';ep=''; resultado='';DerivadaSegunda=''; mostra=false">Limpa</a>
-      </p>
-      <br>
-      <div class="w3-card-4 space" ng-show = "mostra" ng-hide="!mostra">
-        <p><strong>f(x)= </strong> {{resultadoFuncao | limitTo:10}}</p>
+        </p>
+        <br>
+      </div>
+      <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
+        <p><strong>f(x)= </strong> {{resultadoFuncao | limitTo:10}} </p>
         <p><strong>f'(x)= </strong> {{resultado | limitTo:10}}</p>
         <p><strong>f''(x)= </strong> {{DerivadaSegunda | limitTo:10}}</p>
-        <h1>Gráfico de f(x)</h1>
-        <div id="plot"></div>
+        <!-- <h1>Gráfico de f(x)</h1>
+        <div id="plot"></div> -->
       </div>
+
+    </form>
+
+    <form class="w3-container">
+      <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
+      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Expressão"  ng-model = "">
+      <br>
+      <!-- <h3>Valor de ε:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiver in receivers">
+          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiver.value"></td>
+        </tr>
+      </table>
+      <br><br>
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+
+      <p><a class="btn btn-primary" ng-click = "addRecipient(RnAux)">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipient(RnAux)">Deleta x[i]</a>
+      </p>
+      <br>
+    </form>
+
+    <form class="w3-container">
+      <h1>Jacobiano</h1>
+      <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
+      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o m"  ng-model = "">
+      <br>
+
+      <input class="w3-input w3-border " type="text" placeholder="Digite o n"  ng-model = "">
+      <br>
+      <!-- <h3>Valor de ε:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiverJAux in receiversJ">
+          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiverJAux.value"></td>
+        </tr>
+      </table>
+
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiverJAuxF in receiversJF">
+          <td ><input class="w3-input w3-border " type="text" placeholder="f[i]" ng-model="receiverJAuxF.value"></td>
+        </tr>
+      </table>
+      <br><br>
+      <p><a class="btn btn-primary" ng-click = "addRecipientJ()">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipientJ()">Deleta x[i]</a>
+      </p>
       <br><br>
 
+      <br><br>
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+
+      <br>
     </form>
   </div>
   <script src = "./js/derivada.js"></script>
