@@ -4,9 +4,12 @@ app.controller('myCtrl', function($scope) {
   $scope.expression = '';
   $scope.x = '';
   $scope.ep = '';
+   $scope.receivers=[{value:""}];
+   $scope.receiversJ=[{value:""}];
+   $scope.receiversJF=[{value:""}];
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;
-    // $scope.resultado = math.eval($scope.expression,{x: Number($scope.x)});
+    $scope.resultadoFuncao = math.eval($scope.expression,{x: Number($scope.x)});
     try {
       $scope.h = 1000*$scope.ep;
     }
@@ -25,9 +28,9 @@ app.controller('myCtrl', function($scope) {
         return "";
       }
       if(isNaN($scope.ep)){
-          alert("Digite um número válido para o ε");
-          $scope.ep = '';
-          return "";
+        alert("Digite um número válido para o ε");
+        $scope.ep = '';
+        return "";
       }
       if(isNaN($scope.x1)){
         alert("Digite um número válido para o x");
@@ -191,7 +194,7 @@ app.controller('myCtrl', function($scope) {
       console.log(err);
       alert(err);
     }
-      return $scope.p;
+    return $scope.p;
   };
 
   $scope.segunda = function(xFuncao){
@@ -264,4 +267,35 @@ app.controller('myCtrl', function($scope) {
     if(isNaN($scope.ep))
     $scope.ep = "";
   };
+
+  // TABLE DA DERIVADA
+  $scope.addRecipient = function(receiver) {
+    $scope.receivers.push({value:""});
+  };
+
+  $scope.deleteRecipient = function(receiver) {
+    for(var i=0; i<$scope.receivers.length; i++) {
+        $scope.receivers.splice(i, 1);
+        break;
+
+    }
+  };
+
+  //TABLE JACOBIANO
+  // TABLE DA DERIVADA
+  $scope.addRecipientJ = function() {
+    $scope.receiversJ.push({value:""});
+    $scope.receiversJF.push({value:""});
+  };
+
+  $scope.deleteRecipientJ = function() {
+    for(var i=0; i<$scope.receiversJ.length; i++) {
+        $scope.receiversJ.splice(i, 1);
+        $scope.receiversJF.splice(i, 1);
+        break;
+
+    }
+  };
+
+
 });
