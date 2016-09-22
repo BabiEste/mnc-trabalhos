@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Derivadas</title>
+  <link rel="icon" type="image/png" href="./img/x.png" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- SCRIPTS -->
+  <script src="../js/angular/angular.min.js"></script>
+  <script src="../js/math/math.min.js"></script>
+  <script src="../js/math/d3.min.js"></script>
+  <script src="../js/math/function-plot@1.14.0"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/w3.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="derivadas.html">Derivadas</a></li>
+          <li><a href="raizes.html">Raizes</a></li>
+          <li><a href="sistemasLineares.html">Sistemas Lineares</a></li>
+          <li><a href="interpola.html">Interpolação</a></li>
+          <li><a href="integral.html">Integral</a></li>
+          <li><a href="sistemasNaoLineares.html">Sistemas Não-Lineares</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form class="w3-container">
+      <div class="">
+        <h2>Função Real com uma variável e f: R→R </h2>
+        <!-- <h3 >Função:</h3> -->
+        <input id="eq" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
+        <br>
+        <!-- <h3>Valor de x:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Sua variável x"  ng-model = "x">
+        <br>
+        <!-- <h3>Valor de ε:</h3> -->
+        <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "ep">
+        <br>
+        <p>
+          <a class="btn btn-primary" ng-click = "  resultado = calcular(x);DerivadaSegunda = segunda(x); mostra=true; verificaEp()">Calcular   </a>
+          <a class="btn btn-primary" ng-click = "x='';expression='';ep=''; resultado='';DerivadaSegunda=''; mostra=false">Limpa</a>
+        </p>
+        <br>
+      </div>
+      <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
+        <p><strong>f(x)= </strong> {{resultadoFuncao | limitTo:10}} </p>
+        <p><strong>f'(x)= </strong> {{resultado | limitTo:10}}</p>
+        <p><strong>f''(x)= </strong> {{DerivadaSegunda | limitTo:10}}</p>
+        <!-- <h1>Gráfico de f(x)</h1>
+        <div id="plot"></div> -->
+      </div>
+
+    </form>
+
+    <form class="w3-container">
+      <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
+      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Expressão"  ng-model = "">
+      <br>
+      <!-- <h3>Valor de ε:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiver in receivers">
+          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiver.value"></td>
+        </tr>
+      </table>
+      <br><br>
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+
+      <p><a class="btn btn-primary" ng-click = "addRecipient(RnAux)">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipient(RnAux)">Deleta x[i]</a>
+      </p>
+      <br>
+    </form>
+
+    <form class="w3-container">
+      <h1>Jacobiano</h1>
+      <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
+      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
+      <br>
+      <!-- <h3>Valor de x:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o m"  ng-model = "">
+      <br>
+
+      <input class="w3-input w3-border " type="text" placeholder="Digite o n"  ng-model = "">
+      <br>
+      <!-- <h3>Valor de ε:</h3> -->
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiverJAux in receiversJ">
+          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiverJAux.value"></td>
+        </tr>
+      </table>
+
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+      <br>
+      <table>
+        <tr class="toLine"  ng-repeat = "receiverJAuxF in receiversJF">
+          <td ><input class="w3-input w3-border " type="text" placeholder="f[i]" ng-model="receiverJAuxF.value"></td>
+        </tr>
+      </table>
+      <br><br>
+      <p><a class="btn btn-primary" ng-click = "addRecipientJ()">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipientJ()">Deleta x[i]</a>
+      </p>
+      <br><br>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th ng-repeat="i in loop">
+                {{loop}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="(l, line) in linear.data track by $index">
+            <td ng-repeat="(key, item) in line track by $index">
+              <div ng-if="key == 0" scope="row" >L<sub>{{item}}</sub></div>
+              <div ng-if="key != 0">
+                <input type="text" ng-model="linear.data[l][key]" class="form-control">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      <br><br>
+      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
+
+      <br>
+    </form>
+  </div>
+  <script src = "../js/derivada.js"></script>
+  <br><br><br><br>
+  <!-- Footer -->
+  <footer class="container-fluid-footer bg-4 text-center">
+    <p>
+      Luis Uzai
+    </p>  <a href="https://github.com/luisuzai"><img class="git" title="Github" src="../img/git.png" alt="" /></a>
+  </footer>
+</body>
+</html>

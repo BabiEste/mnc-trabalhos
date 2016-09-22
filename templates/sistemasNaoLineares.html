@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Integral</title>
+  <link rel="icon" type="image/png" href="../img/x.png" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- SCRIPTS -->
+  <script src="../js/angular/angular.min.js"></script>
+  <script src="../js/math/math.min.js"></script>
+  <script src="../js/math/d3.min.js"></script>
+  <script src="../js/math/function-plot@1.14.0"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/w3.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="derivadas.html">Derivadas</a></li>
+          <li><a href="raizes.html">Raizes</a></li>
+          <li><a href="sistemasLineares.html">Sistemas Lineares</a></li>
+          <li><a href="interpola.html">Interpolação</a></li>
+          <li><a href="integral.html">Integral</a></li>
+          <li class="active"><a href="sistemasNaoLineares.html">Sistemas Não-Lineares</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <br><br>
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form class="w3-container">
+      <h2>Ordem do Sistema</h2>
+      <input id="" class="w3-input w3-border " type="text" placeholder="2 <= n <= 10"  ng-model = "n">
+      <div class="radio">
+        <label class="radio-inline"><input type="radio" name="optradio" ><strong>Newton</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" ><strong>Newton Modificado</strong></label>
+      </div>
+      <h2>Critério de Parada</h2>
+      <input id="" class="w3-input w3-border " type="text" placeholder="10 <= Iterações <= 100"  ng-model = "iteracoes">
+      <input id="" class="w3-input w3-border " type="text" placeholder="0.01 <= ε <= 0.0001"  ng-model = "ep">
+      <br>
+      <p>
+        <a class="btn btn-primary" ng-click = "">Calcular   </a>
+        <a class="btn btn-primary" ng-click = "">Limpa</a>
+      </p>
+
+
+      <br>
+      <table>
+
+        <thead>
+          <tr>
+            <th>x[i] inicial</th>
+            <th>f[i](x)</th>
+            <th>x[i] Final</th>
+            <th>f[i](x) Final</th>
+          </tr>
+        </thead>
+        <tr class=""  ng-repeat = "l in i">
+          <td><input class="w3-input w3-border" type="text" placeholder="x[i]" style="width:100%" ng-model="x[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" style="width:100%" ng-model="expression[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" disabled style="width:100%" ng-model="xResul[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" disabled style="width:100%" ng-model="fResul[l]"></td>
+        </tr>
+      </table>
+      <br>
+  <br>
+  <p><a class="btn btn-primary" ng-click = "addRecipientJ()">Adiciona x[i] e f[xi] </a>
+    <a class="btn btn-primary" ng-click = "deleteRecipientJ()">Deleta x[i] e f[xi]</a>
+  </p>
+
+</form>
+</div>
+
+<script src = "../js/sistemasNaoLineares.js"></script>
+</body>
+</html>

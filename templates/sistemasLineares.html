@@ -1,45 +1,124 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sistemas Lineares</title>
-    <link rel="icon" type="image/png" href="../img/x.png" />
+<head>
+  <meta charset="utf-8">
+  <title>Sistemas Lineares</title>
+  <link rel="icon" type="image/png" href="../img/x.png" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- SCRIPTS -->
-    <script src="../js/angular/angular.min.js"></script>
-    <script src="../js/math/math.min.js"></script>
-    <script src="../js/math/d3.min.js"></script>
-    <script src="../js/math/function-plot@1.14.0"></script>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- SCRIPTS -->
+  <script src="../js/angular/angular.min.js"></script>
+  <script src="../js/math/math.min.js"></script>
+  <script src="../js/math/d3.min.js"></script>
+  <script src="../js/math/function-plot@1.14.0"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 
-    <!-- STYLES -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/w3.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <!-- STYLES -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/w3.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
 
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid ">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="../index.html">Derivadas</a></li>
-            <li><a href="raizes.html">Raizes</a></li>
-            <li class="active"><a href="sistemasLineares.html">Sistemas Lineares</a></li>
-          </ul>
-        </div>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
       </div>
-    </nav>
-    <br><br>
-  </body>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="derivadas.html">Derivadas</a></li>
+          <li><a href="raizes.html">Raizes</a></li>
+          <li class="active"><a href="sistemasLineares.html">Sistemas Lineares</a></li>
+          <li><a href="interpola.html">Interpolação</a></li>
+          <li><a href="integral.html">Integral</a></li>
+          <li><a href="sistemasNaoLineares.html">Sistemas Não-Lineares</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <br><br>
+
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form class="w3-container">
+      <div class="">
+        <h2>Ordem do Sistema</h2>
+        <!-- <h3 >Função:</h3> -->
+        <input id="" class="w3-input w3-border " type="text" placeholder="Número de variáveis (3 até 20)"  ng-model = "ordem" ng-change="addRecipient()">
+        <!-- <h3>Valor de x:</h3> -->
+        <br>
+        <label class="checkbox-inline"><input type="checkbox" disabled><strong>Preencher vazios com 0</strong></label>
+
+      </div>
+    </form>
+
+    <form class="w3-container">
+      <h2>Métodos</h2>
+      <h3>Diretos</h3>
+      <div class="radio">
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Simples</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Pivotamento Parcial</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Pivotamento total</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Compacto</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Decomposição L.U</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Cholesky</strong></label>
+      </div>
+
+    </form>
+
+    <form class="w3-container">
+      <h3>Iterativos</h3>
+      <div class="radio">
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Jacobi-Richardson</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss-Seidel</strong></label>
+      </div>
+
+    </form>
+
+    <form class="w3-container">
+      <div class="radio">
+        <h2>Opções adicionais</h2>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Sistema</strong></label>
+        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Determinante</strong></label>
+        <label class="radio-inline" ><input type="radio" name="optradio" disabled><strong>Inversa</strong></label>
+      </div>
+
+    </form>
+
+    <form class="w3-container">
+      <h2>Critérios de Parada</h2>
+      <input id="" class="w3-input w3-border " type="text" placeholder="Número de iterações (10 até 100)"  ng-model = "">
+      <br>
+      <h2>Tolerância</h2>
+      <input id="" class="w3-input w3-border " type="text" placeholder="Tolerância (0.001 até 0.000001)"  ng-model = "">
+
+      <br><br>
+
+      <p><a class="btn btn-primary" disabled ng-click = "">Calcular </a>
+        <a class="btn btn-primary" disabled ng-click = "">Limpar</a>
+        <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
+      </p>
+    </form>
+    <form class="w3-container">
+    <h2>Dados</h2>
+      <!-- <table>
+        <tr class=""  ng-repeat = "receiver in receivers">
+          <td ><input class="w3-input w3-border " type="text" placeholder="l[i]" ng-model="receiver[0]"></td>
+          <td ><input class="w3-input w3-border " type="text" placeholder="c[i]" ng-model="receiver.column"></td>
+        </tr>
+      </table> -->
+      {{receivers[0][0]}}
+    </form>
+  </div>
+  <script src = "../js/sistemas.js"></script>
+</body>
 </html>

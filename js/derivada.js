@@ -4,9 +4,10 @@ app.controller('myCtrl', function($scope) {
   $scope.expression = '';
   $scope.x = '';
   $scope.ep = '';
-   $scope.receivers=[{value:""}];
-   $scope.receiversJ=[{value:""}];
-   $scope.receiversJF=[{value:""}];
+  $scope.loop = 3;
+  $scope.receivers=[{value:""}];
+  $scope.receiversJ=[{value:""}];
+  $scope.receiversJF=[{value:""}];
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;
     $scope.resultadoFuncao = math.eval($scope.expression,{x: Number($scope.x)});
@@ -275,8 +276,8 @@ app.controller('myCtrl', function($scope) {
 
   $scope.deleteRecipient = function(receiver) {
     for(var i=0; i<$scope.receivers.length; i++) {
-        $scope.receivers.splice(i, 1);
-        break;
+      $scope.receivers.splice(i, 1);
+      break;
 
     }
   };
@@ -290,9 +291,9 @@ app.controller('myCtrl', function($scope) {
 
   $scope.deleteRecipientJ = function() {
     for(var i=0; i<$scope.receiversJ.length; i++) {
-        $scope.receiversJ.splice(i, 1);
-        $scope.receiversJF.splice(i, 1);
-        break;
+      $scope.receiversJ.splice(i, 1);
+      $scope.receiversJF.splice(i, 1);
+      break;
 
     }
   };
