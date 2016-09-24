@@ -29,7 +29,53 @@ app.controller('myCtrl', function($scope) {
   $scope.grad = [];
   $scope.variablesX=[];
   $scope.hessiana = [];
+  $scope.jacobiFunctions = [];
+  $scope.jacobiFunctions[0] = "sin(x)+sin(y)+sin(z)";
+  $scope.jacobiFunctions[1] = "x*y+x*z+y*z";
+  $scope.jacobiFunctions[2] = "x^3+y*z^2";
+  $scope.jacobiVariables = [];
+  $scope.jacobiMatrix = [];
   $scope.ep2 = 0.001;
+
+  $scope.ep3 = 0.001;
+  $scope.jacobiCalculator = function (){
+    for (var j = 0; j < $scope.i.length; j++) {
+      $scope.jacobiMatrix[j] =[];
+      for(var s = 0; s < $scope.i.length ; s++){
+        $scope.jacobiMatrix[j][s] = $scope.jacobiParcialPrimeira($scope.jacobiFunctions[j],s);
+
+      }
+    }
+  };
+  $scope.jacobiParcialPrimeira = function(expression2,what){
+    var h = 1000*$scope.ep3;
+    var xi,f1,f2,p,q;
+    xi = $scope.jacobiVariables[what];
+    $scope.jacobiVariables[what] = xi-(-h);
+console.log(h);
+    f1 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
+    $scope.jacobiVariables[what] = xi-h;
+    f2 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
+    p = (f1-f2)/(2*h);
+    for (var j = 0; j < 10; j++) {
+      q = p;
+      h = h/2;
+      $scope.jacobiVariables[what] = xi-(-h);
+      f1 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
+      $scope.jacobiVariables[what] = xi-h;
+      f2 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
+      p = (f1-f2)/(2*h);
+      if(Math.abs(p-q)<=$scope.ep3){
+        $scope.jacobiVariables[what]=xi;
+        return p;
+
+      }
+    }
+    $scope.jacobiVariables[what]=xi;
+    return p;
+
+  };
+
   $scope.hessiano = function(){
     for (var j = 0; j < $scope.i.length; j++) {
       $scope.hessiana[j] =[];
@@ -84,13 +130,13 @@ app.controller('myCtrl', function($scope) {
         p = (f1-f2-f3-(-f4))/(4*h*h);
       }
       else {
-          $scope.variablesX[veti] = xi - (-2*h);
-          f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-          $scope.variablesX[veti] = xi - 2*h;
-          f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-          $scope.variablesX[veti] = xi;
-          f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-          p = (f1 - 2*f2 +f3)/(4*h*h);
+        $scope.variablesX[veti] = xi - (-2*h);
+        f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        $scope.variablesX[veti] = xi - 2*h;
+        f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        $scope.variablesX[veti] = xi;
+        f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        p = (f1 - 2*f2 +f3)/(4*h*h);
 
       }
       if(Math.abs(p-q)<=$scope.ep2){
@@ -103,53 +149,53 @@ app.controller('myCtrl', function($scope) {
       }
     }
 
-      $scope.variablesX[veti]=xi;
-      $scope.variablesX[vetj]=xj;
-      if(Math.abs(p-0)<=0.0001)
-      return 0;
-      return p;
+    $scope.variablesX[veti]=xi;
+    $scope.variablesX[vetj]=xj;
+    if(Math.abs(p-0)<=0.0001)
+    return 0;
+    return p;
 
   };
 
 
-    $scope.Gradiente = function(){
-      $scope.resultadoFuncaoVaria = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-      for (var i = 0; i < 3; i++) {
-        $scope.grad[i] = $scope.derivadaParcialPrimeira(i);
-      }
-    };
-    $scope.derivadaParcialPrimeira = function(what){
+  $scope.Gradiente = function(){
+    $scope.resultadoFuncaoVaria = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+    for (var i = 0; i < 3; i++) {
+      $scope.grad[i] = $scope.derivadaParcialPrimeira($scope.expression2,i);
+    }
+  };
+  $scope.derivadaParcialPrimeira = function(expression2,what){
 
-      var h = 1000*$scope.ep2;
-      var xi,f1,f2,p,q;
-      xi = $scope.variablesX[what];
+    var h = 1000*$scope.ep2;
+    var xi,f1,f2,p,q;
+    xi = $scope.variablesX[what];
+    $scope.variablesX[what] = xi-(-h);
+    f1 = math.eval(expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+    // console.log(f1+"   1     "+ h);
+    $scope.variablesX[what] = xi-h;
+    f2 = math.eval(expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+    // console.log(f2+"   1     "+ h);
+    p = (f1-f2)/(2*h);
+    for (var j = 0; j < 10; j++) {
+      q = p;
+      h = h/2;
       $scope.variablesX[what] = xi-(-h);
-      f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-      // console.log(f1+"   1     "+ h);
+      f1 = math.eval(expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      // console.log(f1+"   2       " + h);
       $scope.variablesX[what] = xi-h;
-      f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-      // console.log(f2+"   1     "+ h);
+      f2 = math.eval(expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
       p = (f1-f2)/(2*h);
-      for (var j = 0; j < 10; j++) {
-        q = p;
-        h = h/2;
-        $scope.variablesX[what] = xi-(-h);
-        f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-        // console.log(f1+"   2       " + h);
-        $scope.variablesX[what] = xi-h;
-        f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-        p = (f1-f2)/(2*h);
-        console.log(p+" - " + q);
-        console.log(Math.abs(p-q));
-        if(Math.abs(p-q)<=$scope.ep2){
-          $scope.variablesX[what]=xi;
-          return p;
+      console.log(p+" - " + q);
+      console.log(Math.abs(p-q));
+      if(Math.abs(p-q)<=$scope.ep2){
+        $scope.variablesX[what]=xi;
+        return p;
 
-        }
       }
-      return p;
+    }
+    return p;
 
-    };
+  };
 
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;

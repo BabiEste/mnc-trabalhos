@@ -119,10 +119,14 @@
       <h1>Jacobiano</h1>
       <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
       <!-- <h3>Valor de ε:</h3> -->
-      <input class="w3-input w3-border " type="text" placeholder="Digite o ε">
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model="ep3">
       <br>
       <input class="w3-input w3-border " type="text" placeholder="{{m.length}}" disabled >
       <br>
+      <p>
+        <a class="btn btn-primary" ng-click = "jacobiCalculator()">Calcular   </a>
+        <a class="btn btn-primary" ng-click = "">Limpa</a>
+      </p>
       <p><a class="btn btn-primary" ng-click = "addRecipient(m); addRecipient(n)">Adiciona x[i]   </a>
         <a class="btn btn-primary" ng-click = "deleteRecipient(m); deleteRecipient(n)">Deleta x[i]</a>
       </p>
@@ -130,7 +134,7 @@
       <h2>Variáveis</h2>
       <table class="w3-table w3-hoverable">
         <tr class="">
-          <td  ng-repeat = "l in m"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="{{variables[l]}}" ></td>
+          <td  ng-repeat = "l in m"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="{{variables[l]}}" ng-model="jacobiVariables[l]"></td>
         </tr>
       </table>
 
@@ -139,18 +143,18 @@
       <h2>Funções</h2>
       <table class="w3-table w3-hoverable">
         <tr class=""  >
-          <td ng-repeat = "l in n"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="f[{{l}}]" ></td>
+          <td ng-repeat = "l in n"><input class="w3-input w3-border " type="text" style="width:100%" placeholder="f[{{l}}]" ng-model="jacobiFunctions[l]"></td>
         </tr>
       </table>
       <br>
       <h2>Jacobiana</h2>
       <table class="w3-table w3-hoverable">
-          <tr ng-repeat="l in n">
-            <td ng-repeat="s in n">
-                <input class="w3-input w3-border " type="text" placeholder="" style="width:40%" disabled >
+        <tr ng-repeat="l in n">
+          <td ng-repeat="s in n">
+            <input class="w3-input w3-border " type="text" placeholder="" style="width:40%" disabled ng-model="jacobiMatrix[l][s]">
 
-            </td>
-          </tr>
+          </td>
+        </tr>
 
       </table>
       <br><br>
