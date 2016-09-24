@@ -10,19 +10,8 @@ app.controller('myCtrl', function($scope) {
   $scope.j[0]=0;
   $scope.expression[0]="x^2";
 
-  $scope.addRecipient = function(receiver) {
-    $scope.receivers.push({value:""});
-  };
 
-  $scope.deleteRecipient = function(receiver) {
-    for(var i=0; i<$scope.receivers.length; i++) {
-        $scope.receivers.splice(i, 1);
-        break;
-
-    }
-  };
-
-  $scope.addRecipientJ = function() {
+  $scope.addRecipient = function() {
     if($scope.i.length === 0 ){
     $scope.i.push(0);
     $scope.j.push(0);
@@ -35,12 +24,9 @@ app.controller('myCtrl', function($scope) {
     console.log($scope.expression[$scope.expression.length-1]);
   };
 
-  $scope.deleteRecipientJ = function() {
-    for(var i=0; i<$scope.i.length; i++) {
-        $scope.i.splice(i, 1);
-        break;
+  $scope.deleteRecipient = function() {
+    $scope.i.pop();
 
-    }
   };
 
 });

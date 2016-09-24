@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 var x = [];
 app.controller('myCtrl', function($scope) {
-  $scope.Trapezio = function(){
+  $scope.Trapezio = function(what){
     var h = ($scope.b-$scope.a)/$scope.n;
     var trapezio1=0, trapezio2=0;
     var trapezioMain = 0;
@@ -36,13 +36,13 @@ app.controller('myCtrl', function($scope) {
     }
     $scope.plot();
     var resultado;
-    if ($scope.trapezioDo) {
+    if (what === 3) {
       resultado = trapezioMain;
     }
-    else if ($scope.retEsq) {
+    else if (what === 2) {
       resultado = trapezio2;
     }
-    else if ($scope.retDir) {
+    else if (what === 1) {
       resultado = trapezio1;
     }
     return resultado;
@@ -158,38 +158,6 @@ app.controller('myCtrl', function($scope) {
     }
     else if ($scope.simpsonThreeDo) {
       return $scope.simpsonThree();
-    }
-  };
-  $scope.what = function(){
-    if ($scope.trapezioDo) {
-      $scope.retEsq = false;
-      $scope.retDir=false;
-      $scope.simpsonOne=false;
-      $scope.simpsonThree=false;
-    }
-     if ($scope.retEsq) {
-      $scope.retDir = false;
-      $scope.trapezioDo=false;
-      $scope.simpsonOne=false;
-      $scope.simpsonThree=false;
-    }
-     if ($scope.retDir) {
-      $scope.retEsq = false;
-      $scope.trapezioDo=false;
-      $scope.simpsonOne=false;
-      $scope.simpsonThree=false;
-    }
-     if ($scope.simpsonOneDo) {
-      $scope.retEsq = false;
-      $scope.trapezioDo=false;
-      $scope.retDir=false;
-      $scope.simpsonThree=false;
-    }
-     if ($scope.simpsonThreeDo) {
-      $scope.retEsq = false;
-      $scope.trapezioDo=false;
-      $scope.simpsonOne=false;
-      $scope.ret=false;
     }
   };
 });
