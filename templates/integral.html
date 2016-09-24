@@ -62,20 +62,50 @@
         <input id="" class="w3-input w3-border " type="text" placeholder="n" style="width:40%" ng-model = "n">
       </div>
       <br>
-      <div class="checkbox">
+      <div class="radio">
 
-        <label class="radio-inline"><input type="checkbox" name="optradio" ng-model="retDir" ><strong>Retângulo Direita</strong></label>
-        <label class="radio-inline"><input type="checkbox" name="optradio" ng-model="retEsq"><strong>Retângulo Esquerda</strong></label>
-        <label class="radio-inline"><input type="checkbox" name="optradio" ng-model="trapezioDo" ><strong>Trapézio</strong></label>
-        <label class="radio-inline"><input type="checkbox" name="optradio" ng-model="simpsonOneDo" ><strong>1/3 de Simpson</strong></label>
-        <label class="radio-inline"><input type="checkbox" name="optradio" ng-model="simpsonThreeDo"><strong>3/8 de Simpson</strong></label>
+        <label class="radio-inline"><input type="radio" ng-model="whatDo" value="retDir"><strong>Retângulo Direita</strong></label>
+        <label class="radio-inline"><input type="radio" ng-model="whatDo" value="retEsq"><strong>Retângulo Esquerda</strong></label>
+        <label class="radio-inline"><input type="radio" ng-model="whatDo" value="Trape"><strong>Trapézio</strong></label>
+        <label class="radio-inline"><input type="radio" ng-model="whatDo" value="simpsonOneDo"><strong>1/3 de Simpson</strong></label>
+        <label class="radio-inline"><input type="radio" ng-model="whatDo" value="simpsonThreeDo"><strong>3/8 de Simpson</strong></label>
       </div>
 
       <br>
-      <p><a class="btn btn-primary" ng-click = "resultado = do()">Calcula</a>
-        <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
-      </p>
-      <h3>Solução: {{resultado | limitTo:8}}</h3>
+
+      <div ng-switch="whatDo">
+        <div ng-switch-when="retEsq">
+          <p><a class="btn btn-primary" ng-click = "resultado = Trapezio(2)">Calcula</a>
+            <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
+          </p>
+          <h3>Solução: {{resultado | limitTo:8}}</h3>
+        </div>
+        <div ng-switch-when="retDir">
+          <p><a class="btn btn-primary" ng-click = "resultado = Trapezio(1)">Calcula</a>
+            <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
+          </p>
+          <h3>Solução: {{resultado | limitTo:8}}</h3>
+        </div>
+        <div ng-switch-when="Trape">
+          <p><a class="btn btn-primary" ng-click = "resultado = Trapezio(3)">Calcula</a>
+            <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
+          </p>
+          <h3>Solução: {{resultado | limitTo:8}}</h3>
+        </div>
+        <div ng-switch-when="simpsonOneDo">
+          <p><a class="btn btn-primary" ng-click = "resultado = simpsonOne()">Calcula</a>
+            <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
+          </p>
+          <h3>Solução: {{resultado | limitTo:8}}</h3>
+        </div>
+        <div ng-switch-when="simpsonThreeDo">
+          <p><a class="btn btn-primary" ng-click = "resultado = simpsonThree()">Calcula</a>
+            <a class="btn btn-primary" ng-click = "Limpa()">Limpa</a>
+          </p>
+          <h3>Solução: {{resultado | limitTo:8}}</h3>
+        </div>
+      </div>
+      <!-- <h3>Solução: {{resultado | limitTo:8}}</h3> -->
       <div id="plot"></div>
     </form>
   </div>

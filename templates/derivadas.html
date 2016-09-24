@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Derivadas</title>
-  <link rel="icon" type="image/png" href="./img/x.png" />
+  <link rel="icon" type="image/png" href="../img/x.png" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- SCRIPTS -->
@@ -76,82 +76,83 @@
 
     <form class="w3-container">
       <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
-      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
       <br>
-      <!-- <h3>Valor de x:</h3> -->
-      <input class="w3-input w3-border " type="text" placeholder="Expressão"  ng-model = "">
+      <input class="w3-input w3-border " type="text" placeholder="Expressão em função de x e/ou y e/ou z"  ng-model = "expression2">
       <br>
-      <!-- <h3>Valor de ε:</h3> -->
-      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "ep2">
       <br>
-      <table>
-        <tr class="toLine"  ng-repeat = "receiver in receivers">
-          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiver.value"></td>
+
+      <p>
+        <a class="btn btn-primary" ng-click = "Gradiente(); hessiano();">Calcular   </a>
+        <a class="btn btn-primary" ng-click = "">Limpa</a>
+      </p>
+
+      <br>
+      <p><a class="btn btn-primary" ng-click = "addRecipient(i)">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipient(i)">Deleta x[i]</a>
+      </p>
+      <br>
+      <h2>Valores de x, y e z</h2>
+      <table class="w3-table-all w3-hoverable">
+        <tr >
+          <td class=""  ng-repeat = "l in i"><input class="w3-input w3-border " type="text" placeholder="{{variables[l]}}" style="width:40%" ng-model="variablesX[l]"></td>
+
         </tr>
       </table>
       <br><br>
-      <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
-
-      <p><a class="btn btn-primary" ng-click = "addRecipient(RnAux)">Adiciona x[i]   </a>
-        <a class="btn btn-primary" ng-click = "deleteRecipient(RnAux)">Deleta x[i]</a>
-      </p>
-      <br>
+      <h2>Gradiente</h2>
+      <table class="w3-table-all w3-hoverable">
+        <tr>
+          <td class=""  ng-repeat = "s in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:40%" ng-model="grad[s]"></td>
+        </tr>
+      </table>
+      <br><br>
+      <h2>Hessiana</h2>
+      <table class="w3-table w3-hoverable">
+        <tr ng-repeat = "l in i">
+          <td class=""  ng-repeat = "m in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:40%" ng-model = "hessiana[l][m]"></td>
+        </tr>
+      </table>
     </form>
 
     <form class="w3-container">
       <h1>Jacobiano</h1>
       <h2>Função Real com <strong>n</strong> variáveis Reais e <strong>f: Rn→R</strong> </h2>
-      <!-- <input id="#" class="w3-input w3-border " type="text" placeholder="Número de variáveis"  ng-model = "Rn.n"> -->
-      <br>
-      <!-- <h3>Valor de x:</h3> -->
-      <input class="w3-input w3-border " type="text" placeholder="Digite o m"  ng-model = "">
-      <br>
-
-      <input class="w3-input w3-border " type="text" placeholder="Digite o n"  ng-model = "">
-      <br>
       <!-- <h3>Valor de ε:</h3> -->
-      <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "">
+      <input class="w3-input w3-border " type="text" placeholder="Digite o ε">
       <br>
-      <table>
-        <tr class="toLine"  ng-repeat = "receiverJAux in receiversJ">
-          <td ><input class="w3-input w3-border " type="text" placeholder="x[i]" ng-model="receiverJAux.value"></td>
+      <input class="w3-input w3-border " type="text" placeholder="{{m.length}}" disabled >
+      <br>
+      <p><a class="btn btn-primary" ng-click = "addRecipient(m); addRecipient(n)">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipient(m); deleteRecipient(n)">Deleta x[i]</a>
+      </p>
+      <br>
+      <h2>Variáveis</h2>
+      <table class="w3-table w3-hoverable">
+        <tr class="">
+          <td  ng-repeat = "l in m"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="{{variables[l]}}" ></td>
         </tr>
       </table>
 
       <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
       <br>
-      <table>
-        <tr class="toLine"  ng-repeat = "receiverJAuxF in receiversJF">
-          <td ><input class="w3-input w3-border " type="text" placeholder="f[i]" ng-model="receiverJAuxF.value"></td>
+      <h2>Funções</h2>
+      <table class="w3-table w3-hoverable">
+        <tr class=""  >
+          <td ng-repeat = "l in n"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="f[{{l}}]" ></td>
         </tr>
       </table>
-      <br><br>
-      <p><a class="btn btn-primary" ng-click = "addRecipientJ()">Adiciona x[i]   </a>
-        <a class="btn btn-primary" ng-click = "deleteRecipientJ()">Deleta x[i]</a>
-      </p>
-      <br><br>
-        <table>
-          <thead>
-            <tr>
-              <th>
-                #
-              </th>
-              <th ng-repeat="i in loop">
-                {{loop}}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="(l, line) in linear.data track by $index">
-            <td ng-repeat="(key, item) in line track by $index">
-              <div ng-if="key == 0" scope="row" >L<sub>{{item}}</sub></div>
-              <div ng-if="key != 0">
-                <input type="text" ng-model="linear.data[l][key]" class="form-control">
-              </div>
+      <br>
+      <h2>Jacobiana</h2>
+      <table class="w3-table w3-hoverable">
+          <tr ng-repeat="l in n">
+            <td ng-repeat="s in n">
+                <input class="w3-input w3-border " type="text" placeholder="" style="width:40%" disabled >
+
             </td>
           </tr>
-        </tbody>
-        </table>
+
+      </table>
       <br><br>
       <!-- {{Rn.n + "  "+ Rn.Variavel}} -->
 

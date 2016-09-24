@@ -55,7 +55,12 @@
         <label class="radio-inline"><input type="radio" name="optradio" ><strong>Interpolação por Newton-Gregory</strong></label>
       </div>
       <h2>Tabela de Dados</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="Número de pontos (n+1)"  ng-model = "">
+      <div class="toLine">
+        <h5><strong>Número de pontos (n+1)</strong></h5><input id="" class="w3-input w3-border " type="text" placeholder="Número de pontos (n+1)"  disabled ng-model = "i[i.length-1] +1">
+
+        <a class="btn btn-primary button-border" ng-click = "addRecipient()">Adiciona x[i] e f[xi] </a>
+        <a class="btn btn-primary button-border" ng-click = "deleteRecipient()">Deleta x[i] e f[xi]</a>
+      </div>
       <input id="" class="w3-input w3-border " type="text" placeholder="Grau do polinômio (k, se k < n)"  ng-model = "">
       <input id="" class="w3-input w3-border " type="text" placeholder="Ponto de referência (z, se k < n)"  ng-model = "">
       <br>
@@ -63,24 +68,21 @@
         <a class="btn btn-primary" ng-click = "">Calcular   </a>
         <a class="btn btn-primary" ng-click = "">Limpa</a>
       </p>
-
-
+      <br>
       <br>
       <table>
-        <tr class="toLine"  ng-repeat = "receiverJAux in receiversJ">
-          <td ><input class="w3-input w3-border" type="text" placeholder="x[i]" style="width:40%" ng-model="receiverJAux.value"></td>
+        <thead>
+          <tr>
+            <th>x[i]</th>
+            <th>f(x[i])</th>
+          </tr>
+        </thead>
+        <tr class=""  ng-repeat = "m in i">
+          <td ><input class="" type="text" placeholder="x[i]" style="width:100%" ng-model="xi[m]"></td>
+          <td ><input class="" type="text" placeholder="f[xi]" style="width:100%" ng-model="xi[m]"></td>
         </tr>
       </table>
       <br>
-      <table>
-        <tr class="toLine"  ng-repeat = "receiverJAuxF in receiversJF">
-          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" style="width:40%" ng-model="receiverJAuxF.value"></td>
-        </tr>
-      </table>
-      <br>
-      <p><a class="btn btn-primary" ng-click = "addRecipientJ()">Adiciona x[i] e f[xi] </a>
-        <a class="btn btn-primary" ng-click = "deleteRecipientJ()">Deleta x[i] e f[xi]</a>
-      </p>
 
     </form>
   </div>

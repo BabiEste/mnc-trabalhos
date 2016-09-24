@@ -2,12 +2,155 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
   $scope.expression = '';
+  $scope.expression2= '';
   $scope.x = '';
+  $scope.y = '';
+  $scope.n = 1;
+  $scope.i=[];
+  $scope.m=[];
+  $scope.n=[];
+  $scope.i[0]=0;
+  $scope.m[0]=0;
+  $scope.m[1]=1;
+  $scope.m[2]=2;
+  $scope.n[0]=0;
+  $scope.n[1]=1;
+  $scope.n[2]=2;
+  $scope.i[1]=1;
+  $scope.i[2]=2;
+  $scope.variables =[];
+  $scope.variables[0] ="x";
+  $scope.variables[1] ="y";
+  $scope.variables[2] ="z";
+  $scope.z = '';
   $scope.ep = '';
-  $scope.loop = 3;
-  $scope.receivers=[{value:""}];
-  $scope.receiversJ=[{value:""}];
-  $scope.receiversJF=[{value:""}];
+  $scope.result = [];
+  $scope.ep2 = '';
+  $scope.grad = [];
+  $scope.variablesX=[];
+  $scope.hessiana = [];
+  $scope.ep2 = 0.001;
+  $scope.hessiano = function(){
+    for (var j = 0; j < $scope.i.length; j++) {
+      $scope.hessiana[j] =[];
+      for(var s = 0; s < $scope.i.length ; s++){
+        $scope.hessiana[j][s]=$scope.derivadaParcialSegunda(j,s);
+
+      }
+    }
+  };
+  $scope.derivadaParcialSegunda= function(veti, vetj){
+    var h = $scope.ep2 * 1000;
+    var xi,xj,f1,f2,f3,f4,p,q;
+    xi = $scope.variablesX[veti];
+    xj = $scope.variablesX[vetj];
+    if(veti !== vetj){
+      $scope.variablesX[veti] = xi - (-h);
+      $scope.variablesX[vetj] = xj - (-h);
+      f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      $scope.variablesX[vetj] = xj - h;
+      f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      $scope.variablesX[veti] = xi - h;
+      $scope.variablesX[vetj] = xj - h;
+      f4 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      $scope.variablesX[vetj] = xj - (-h);
+      f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      p = (f1-f2-f3-(-f4))/(4*h*h);
+    }
+    else{
+      $scope.variablesX[veti] = xi - (-2*h);
+      f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      $scope.variablesX[veti] = xi - 2*h;
+      f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      $scope.variablesX[veti] = xi;
+      f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      p = (f1 - 2*f2 -(-f3))/(4*h*h);
+    }
+
+    for (var j = 0; j < 10; j++) {
+      q = p;
+      h = h/2;
+      if(veti !== vetj){
+        $scope.variablesX[veti] = xi - (-h);
+        $scope.variablesX[vetj] = xj - (-h);
+        f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        $scope.variablesX[vetj] = xj - h;
+        f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        $scope.variablesX[veti] = xi - h;
+        $scope.variablesX[vetj] = xj - h;
+        f4 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        $scope.variablesX[vetj] = xj - (-h);
+        f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        p = (f1-f2-f3-(-f4))/(4*h*h);
+      }
+      else {
+          $scope.variablesX[veti] = xi - (-2*h);
+          f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+          $scope.variablesX[veti] = xi - 2*h;
+          f3 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+          $scope.variablesX[veti] = xi;
+          f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+          p = (f1 - 2*f2 +f3)/(4*h*h);
+
+      }
+      if(Math.abs(p-q)<=$scope.ep2){
+        $scope.variablesX[veti]=xi;
+        $scope.variablesX[vetj]=xj;
+        if(Math.abs(p-0)<=0.0001)
+        return 0;
+        return p;
+
+      }
+    }
+
+      $scope.variablesX[veti]=xi;
+      $scope.variablesX[vetj]=xj;
+      if(Math.abs(p-0)<=0.0001)
+      return 0;
+      return p;
+
+  };
+
+
+    $scope.Gradiente = function(){
+      $scope.resultadoFuncaoVaria = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      for (var i = 0; i < 3; i++) {
+        $scope.grad[i] = $scope.derivadaParcialPrimeira(i);
+      }
+    };
+    $scope.derivadaParcialPrimeira = function(what){
+
+      var h = 1000*$scope.ep2;
+      var xi,f1,f2,p,q;
+      xi = $scope.variablesX[what];
+      $scope.variablesX[what] = xi-(-h);
+      f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      // console.log(f1+"   1     "+ h);
+      $scope.variablesX[what] = xi-h;
+      f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+      // console.log(f2+"   1     "+ h);
+      p = (f1-f2)/(2*h);
+      for (var j = 0; j < 10; j++) {
+        q = p;
+        h = h/2;
+        $scope.variablesX[what] = xi-(-h);
+        f1 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        // console.log(f1+"   2       " + h);
+        $scope.variablesX[what] = xi-h;
+        f2 = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
+        p = (f1-f2)/(2*h);
+        console.log(p+" - " + q);
+        console.log(Math.abs(p-q));
+        if(Math.abs(p-q)<=$scope.ep2){
+          $scope.variablesX[what]=xi;
+          return p;
+
+        }
+      }
+      return p;
+
+    };
+
   $scope.calcular = function(xFuncao) {
     $scope.x = xFuncao;
     $scope.resultadoFuncao = math.eval($scope.expression,{x: Number($scope.x)});
@@ -270,33 +413,37 @@ app.controller('myCtrl', function($scope) {
   };
 
   // TABLE DA DERIVADA
-  $scope.addRecipient = function(receiver) {
-    $scope.receivers.push({value:""});
-  };
+  // $scope.addRecipientss = function() {
+  //   if($scope.i.length === 0 ){
+  //     $scope.i.push(0);
+  //   }
+  //   else {
+  //     $scope.i.push($scope.i[($scope.i.length-1)]+1);
+  //
+  //   }
+  //   console.log($scope.i[$scope.i.length-1]);
+  // };
+  //
+  // $scope.deleteRecipientss = function() {
+  //   $scope.i.pop();
+  // };
 
-  $scope.deleteRecipient = function(receiver) {
-    for(var i=0; i<$scope.receivers.length; i++) {
-      $scope.receivers.splice(i, 1);
-      break;
+  $scope.addRecipient = function(vet) {
+    if(vet.length === 0 ){
+      vet.push(0);
+    }
+    else {
+      vet.push(vet[(vet.length-1)]+1);
 
     }
+    console.log(vet[vet.length-1]);
   };
 
-  //TABLE JACOBIANO
-  // TABLE DA DERIVADA
-  $scope.addRecipientJ = function() {
-    $scope.receiversJ.push({value:""});
-    $scope.receiversJF.push({value:""});
+  $scope.deleteRecipient = function(vet) {
+    vet.pop();
   };
 
-  $scope.deleteRecipientJ = function() {
-    for(var i=0; i<$scope.receiversJ.length; i++) {
-      $scope.receiversJ.splice(i, 1);
-      $scope.receiversJF.splice(i, 1);
-      break;
 
-    }
-  };
 
 
 });
