@@ -132,10 +132,25 @@ app.controller('myCtrl', function($scope) {
     $scope.n = "";
     console.log(x[0]);
   };
+  function computeYScale (width, height, xScale) {
+  var xDiff = xScale[1] - xScale[0];
+  var yDiff = height * xDiff / width;
+  return [-yDiff / 2, yDiff / 2];
+}
   $scope.plot = function(){
     //Desenha o gráfico
     try {
+      var width = 800;
+      var height = 400;
+
+      // desired xDomain values
+      var xScale = [-10, 10];
+
       functionPlot({
+        width: width,
+        height: height,
+        xDomain: xScale,
+        yDomain: computeYScale(width, height, xScale),
         target: '#plot',
         data: [{
           fn: $scope.expression,

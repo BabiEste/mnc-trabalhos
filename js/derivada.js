@@ -52,7 +52,7 @@ app.controller('myCtrl', function($scope) {
     var xi,f1,f2,p,q;
     xi = $scope.jacobiVariables[what];
     $scope.jacobiVariables[what] = xi-(-h);
-console.log(h);
+    console.log(h);
     f1 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
     $scope.jacobiVariables[what] = xi-h;
     f2 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
