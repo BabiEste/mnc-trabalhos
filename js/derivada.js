@@ -12,16 +12,16 @@ app.controller('myCtrl', function($scope) {
   $scope.i[0]=0;
   $scope.m[0]=0;
   $scope.m[1]=1;
-  $scope.m[2]=2;
+  // $scope.m[2]=2;
   $scope.n[0]=0;
   $scope.n[1]=1;
-  $scope.n[2]=2;
+  // $scope.n[2]=2;
   $scope.i[1]=1;
-  $scope.i[2]=2;
+  // $scope.i[2]=2;
   $scope.variables =[];
   $scope.variables[0] ="x";
   $scope.variables[1] ="y";
-  $scope.variables[2] ="z";
+  // $scope.variables[2] ="z";
   $scope.z = '';
   $scope.ep = '';
   $scope.result = [];
@@ -32,18 +32,19 @@ app.controller('myCtrl', function($scope) {
   $scope.jacobiFunctions = [];
   $scope.jacobiFunctions[0] = "sin(x)+sin(y)+sin(z)";
   $scope.jacobiFunctions[1] = "x*y+x*z+y*z";
-  $scope.jacobiFunctions[2] = "x^3+y*z^2";
+  // $scope.jacobiFunctions[2] = "x^3+y*z^2";
   $scope.jacobiVariables = [];
   $scope.jacobiMatrix = [];
   $scope.ep2 = 0.001;
 
   $scope.ep3 = 0.001;
   $scope.jacobiCalculator = function (){
-    for (var j = 0; j < $scope.i.length; j++) {
+    console.log($scope.n.length);
+    for (var j = 0; j < $scope.n.length; j++) {
       $scope.jacobiMatrix[j] =[];
-      for(var s = 0; s < $scope.i.length ; s++){
+      for(var s = 0; s < $scope.n.length ; s++){
         $scope.jacobiMatrix[j][s] = $scope.jacobiParcialPrimeira($scope.jacobiFunctions[j],s);
-
+        console.log($scope.jacobiMatrix[j][s]);
       }
     }
   };
@@ -52,7 +53,6 @@ app.controller('myCtrl', function($scope) {
     var xi,f1,f2,p,q;
     xi = $scope.jacobiVariables[what];
     $scope.jacobiVariables[what] = xi-(-h);
-    console.log(h);
     f1 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});
     $scope.jacobiVariables[what] = xi-h;
     f2 = math.eval(expression2,{x: Number($scope.jacobiVariables[0]),y: Number($scope.jacobiVariables[1]),z: Number($scope.jacobiVariables[2])});

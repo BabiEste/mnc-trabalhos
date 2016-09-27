@@ -52,23 +52,20 @@
 
     <form class="w3-container">
       <h2>Métodos</h2>
-      <select id="sct" class="form-control">
-        <optgroup label="Diretos">
+      <h3>Diretos</h3>
+      <select id="sct" class="form-control ">
           <option value="linear">Gauss - Simples</option>
           <option value="newton">Gauss - Pivotamento Parcial</option>
           <option value="gregory">Gauss - Pivotamento total</option>
           <option value="linear">Gauss - Compacto</option>
           <option value="newton">Decomposição L.U</option>
           <option value="gregory">Cholesky</option>
-
-        </optgroup>
-        <optgroup label="Iterativos">
-          <option value="linear">Jacobi-Richardson</option>
-          <option value="newton">Gauss-Seidel</option>
-
-        </optgroup>
       </select>
-
+      <br><h3>Iterativos</h3>
+      <select id="sct2" class="form-control ">
+          <option value="newton">Decomposição L.U</option>
+          <option value="gregory">Cholesky</option>
+      </select>
     </form>
 
     <form class="w3-container">
