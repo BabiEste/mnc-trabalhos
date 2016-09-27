@@ -1,28 +1,24 @@
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
-  $scope.expression = 'sin(x)';
-  $scope.expression3 = 'x - cos(x)';
-  $scope.expression2 = '(((x+6)*20/12)^(1/2))/10 * sin((x+6)*20/12)';
-  $scope.a = -10;
-  $scope.ep = 0.01;
-  $scope.b = 10;
-  $scope.delta = 0.1;
+  $scope.expression = '';
+  $scope.delta = 0.5;
   $scope.intervaloImparp=[];
   $scope.intervaloImparq=[];
   $scope.solucao = [];
-  $teste = '';
 
   $scope.buscaUniforme = function(){
     var p,q, deltaBusca;
     deltaBusca = $scope.delta;
     if($scope.intervaloImparq.length !== 0){
-    delete $scope.intervaloImparq[0];
-    delete $scope.intervaloImparp[0];
-    $scope.intervaloImparq=[];
-    $scope.intervaloImparp= [];
-    console.log($scope.intervaloImparp.length);
-}
+      delete $scope.intervaloImparq[0];
+      delete $scope.intervaloImparp[0];
+      $scope.intervaloImparq=[];
+      $scope.intervaloImparp= [];
+      console.log($scope.intervaloImparp.length);
+    }
+    if($scope.a > $scope.b)
+    alert("Digitou o intervalo a maior que o b? Isso não pode não, em!");
     if(isNaN($scope.a) || isNaN($scope.b) || isNaN($scope.delta))
     alert("Algo de errado não está certo, digitou letras onde não devia? Malandrinho, em!");
     p = $scope.a;
@@ -83,7 +79,7 @@ app.controller('myCtrl', function($scope) {
 
   $scope.newtonCalculator =function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
-      $scope.solucao[i]=$scope.newton($scope.intervaloImparp[i],$scope.intervaloImparq[i]);
+      $scope.solucao[i]=round($scope.newton($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
 
@@ -105,7 +101,7 @@ app.controller('myCtrl', function($scope) {
   };
   $scope.newtonModCalculator =function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
-      $scope.solucao[i]=$scope.newtonMod($scope.intervaloImparp[i],$scope.intervaloImparq[i]);
+      $scope.solucao[i]=round($scope.newtonMod($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
 
@@ -137,12 +133,12 @@ app.controller('myCtrl', function($scope) {
 
   $scope.cordasCalculator = function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
-      $scope.solucao[i]=$scope.cordas($scope.intervaloImparp[i],$scope.intervaloImparq[i]);
+      $scope.solucao[i]=round($scope.cordas($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
   $scope.cordasModCalculator = function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
-      $scope.solucao[i]=$scope.cordasModificado($scope.intervaloImparp[i],$scope.intervaloImparq[i]);
+      $scope.solucao[i]=round($scope.cordasModificado($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
 
@@ -227,7 +223,7 @@ app.controller('myCtrl', function($scope) {
 
   $scope.divisaoMeioCalculator = function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
-      $scope.solucao[i]=$scope.divisaoMeio($scope.intervaloImparp[i],$scope.intervaloImparq[i]);
+      $scope.solucao[i]=round($scope.divisaoMeio($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
   $scope.divisaoMeio = function(aAux,bAux){
@@ -334,10 +330,10 @@ app.controller('myCtrl', function($scope) {
     return p;
   };
   function computeYScale (width, height, xScale) {
-  var xDiff = xScale[1] - xScale[0];
-  var yDiff = height * xDiff / width;
-  return [-yDiff / 2, yDiff / 2];
-}
+    var xDiff = xScale[1] - xScale[0];
+    var yDiff = height * xDiff / width;
+    return [-yDiff / 2, yDiff / 2];
+  }
   $scope.plot = function(){
     //Desenha o gráfico
     console.log("yoo");

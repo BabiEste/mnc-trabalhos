@@ -140,8 +140,8 @@ app.controller('myCtrl', function($scope) {
   $scope.plot = function(){
     //Desenha o gráfico
     try {
-      var width = 800;
-      var height = 400;
+      var width = 600;
+      var height = 300;
 
       // desired xDomain values
       var xScale = [-10, 10];
