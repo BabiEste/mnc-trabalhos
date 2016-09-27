@@ -44,39 +44,56 @@
     </div>
   </nav>
   <br><br>
-  <div ng-app="" ng-controller="">
-    <form class="w3-container">
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <!-- <form class="w3-container">
       <div class="">
         <h2>Função, intervalo de busca e passos para separar o intervalo com indício de conter as raízes </h2>
-        <!-- <h3 >Função:</h3> -->
         <input id="eq" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
         <br>
-        <!-- <h3>Valor de x:</h3> -->
         <input class="w3-input w3-border " type="text" placeholder="Intervalo a"  ng-model = "a">
         <br>
-        <!-- <h3>Valor de x:</h3> -->
         <input class="w3-input w3-border " type="text" placeholder="Intervalo b"  ng-model = "b">
         <br>
-        <!-- <h3>Valor de ε:</h3> -->
         <input class="w3-input w3-border " type="text" placeholder="Digite o Δ" ng-model = "delta">
         <br>
-        <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
+        <table class="w3-table w3-hoverable">
+          <thead >
+            <th ng-repeat = "m in intervaloImparp">
+              a
+            </th>
+          </thead>
+          <tr>
+            <td class=""  ng-repeat = "m in intervaloImparp"><input class="w3-input w3-border " type="text" disabled placeholder="" style="width:100%" ng-model = "m"></td>
+          </tr>
+        </table>
+        <table class="w3-table w3-hoverable">
+          <thead >
+            <th ng-repeat = "l in intervaloImparp">
+              b
+            </th>
+          </thead>
+          <tr>
+            <td class=""  ng-repeat = "m in intervaloImparq"><input class="w3-input w3-border " type="text" disabled placeholder="" style="width:100%" ng-model = "m"></td>
+          </tr>
+        </table>
+        <br>
+        <p><a class="btn btn-primary" ng-click = "">Calcular   </a>
           <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
           <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
         </p>
         <br>
       </div>
-    </form>
+    </form> -->
     <!-- <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
     <h1>Gráfico de f(x)</h1>
     <div id="plot"></div>
   </div> -->
-
   <form class="w3-container">
     <div class="">
       <h2>Função, intervalo de busca e precisão para calcular raiz no intervalo </h2>
       <!-- <h3 >Função:</h3> -->
-      <input id="" class="w3-input w3-border " type="text" placeholder="Sua função"  ng-model = "expression">
+      <input id="" class="w3-input w3-border " type="text" placeholder="Sua função" ng-model = "expression">
       <br>
       <!-- <h3>Valor de x:</h3> -->
       <input class="w3-input w3-border " type="text" placeholder="Intervalo a"  ng-model = "a">
@@ -87,36 +104,92 @@
       <!-- <h3>Valor de ε:</h3> -->
       <input class="w3-input w3-border " type="text" placeholder="Digite o ε" ng-model = "ep">
       <br>
-      <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
-        <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
-        <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
-      </p>
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" ng-click="plot()" data-target="#myModal">Gráfico</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Gráfico</h4>
+            </div>
+            <div class="modal-body">
+
+              <div id="plot"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
       <br>
       <h2>Métodos disponíveis</h2>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Busca Uniforme</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Método das cordas</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Método de Newton</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Método da Bisseção</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Método das cordas modificado</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Método de Newton modificado</strong></label>
+      <label class="radio-inline"><input type="radio" ng-model="whatDo" value="bisMet"><strong>Método da Bisseção</strong></label>
+      <label class="radio-inline"><input type="radio" ng-model="whatDo" value="cordasMet"><strong>Método das cordas</strong></label>
+      <label class="radio-inline"><input type="radio" ng-model="whatDo" value="Newton"><strong>Método de Newton</strong></label>
+      <label class="radio-inline"><input type="radio" ng-model="whatDo" value="cordasMod"><strong>Método das cordas modificado</strong></label>
+      <label class="radio-inline"><input type="radio" ng-model="whatDo" value="NewtonMod"><strong>Método de Newton modificado</strong></label>
 
-      <h2>Opções de apresentação</h2>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Iterações</strong></label>
-      <label class="checkbox-inline"><input type="checkbox"><strong>Gráfico</strong></label>
+
 
       <br><br>
-      <p><a class="btn btn-primary" disabled ng-click = "">Calcular   </a>
-        <a class="btn btn-primary" disabled ng-click = "">Limpa</a>
-      </p>
-      <h2>Solução:</h2>
-      <div class="w3-card-4 space  resize" ng-show = "mostra" ng-hide="!mostra">
-        <p><strong>x= </strong> </p>
-        <p><strong>f(x)= </strong> </p>
-        <!-- <h1>Gráfico de f(x)</h1>
-        <div id="plot"></div> -->
+
+      <div ng-switch="whatDo">
+        <div ng-switch-when="bisMet">
+          <p><a class="btn btn-primary" ng-click = "buscaUniforme(); divisaoMeioCalculator();plot()">Calcula</a>
+            <a class="btn btn-primary" ng-click = "">Limpa</a>
+          </p>
+        </div>
       </div>
+      <div ng-switch="whatDo">
+        <div ng-switch-when="cordasMet">
+          <p><a class="btn btn-primary" ng-click = "buscaUniforme(); cordasCalculator();">Calcula</a>
+            <a class="btn btn-primary" ng-click = "">Limpa</a>
+          </p>
+        </div>
+      </div>
+      <div ng-switch="whatDo">
+        <div ng-switch-when="Newton">
+          <p><a class="btn btn-primary" ng-click = "buscaUniforme();newtonCalculator();">Calcula</a>
+            <a class="btn btn-primary" ng-click = "solucao">Limpa</a>
+          </p>
+          {{teste}}
+        </div>
+      </div>
+      <div ng-switch="whatDo">
+        <div ng-switch-when="cordasMod">
+          <p><a class="btn btn-primary" ng-click = "buscaUniforme(); cordasModCalculator();">Calcula</a>
+            <a class="btn btn-primary" ng-click = "">Limpa</a>
+          </p>
+        </div>
+      </div>
+      <div ng-switch="whatDo">
+        <div ng-switch-when="NewtonMod">
+          <p><a class="btn btn-primary" ng-click = "buscaUniforme(); newtonModCalculator();">Calcula</a>
+            <a class="btn btn-primary" ng-click = "">Limpa</a>
+          </p>
+        </div>
+      </div>
+      <br>
+      <table class="w3-table w3-hoverable">
+        <thead >
+          <th ng-repeat = "m in intervaloImparp">
+            Solução
+          </th>
+        </thead>
+        <tr>
+          <td ng-repeat = "l in solucao"><input class="w3-input w3-border " type="text" disabled style="width:100%" ng-model = "l"></td>
+        </tr>
+      </table>
     </div>
   </form>
 </div>
+
+<script src = "../js/raizes.js"></script>
 </body>
 </html>
