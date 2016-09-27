@@ -49,76 +49,68 @@
 
 
   <div ng-app="myApp" ng-controller="myCtrl">
-    <form class="w3-container">
-      <div class="">
-        <h2>Ordem do Sistema</h2>
-        <!-- <h3 >Função:</h3> -->
-        <input id="" class="w3-input w3-border " type="text" placeholder="Número de variáveis (3 até 20)"  ng-model = "ordem" ng-change="addRecipient()">
-        <!-- <h3>Valor de x:</h3> -->
-        <br>
-        <label class="checkbox-inline"><input type="checkbox" disabled><strong>Preencher vazios com 0</strong></label>
-
-      </div>
-    </form>
 
     <form class="w3-container">
       <h2>Métodos</h2>
-      <h3>Diretos</h3>
-      <div class="radio">
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Simples</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Pivotamento Parcial</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Pivotamento total</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss - Compacto</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Decomposição L.U</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Cholesky</strong></label>
-      </div>
+      <select id="sct" class="form-control">
+        <optgroup label="Diretos">
+          <option value="linear">Gauss - Simples</option>
+          <option value="newton">Gauss - Pivotamento Parcial</option>
+          <option value="gregory">Gauss - Pivotamento total</option>
+          <option value="linear">Gauss - Compacto</option>
+          <option value="newton">Decomposição L.U</option>
+          <option value="gregory">Cholesky</option>
+
+        </optgroup>
+        <optgroup label="Iterativos">
+          <option value="linear">Jacobi-Richardson</option>
+          <option value="newton">Gauss-Seidel</option>
+
+        </optgroup>
+      </select>
 
     </form>
 
     <form class="w3-container">
-      <h3>Iterativos</h3>
-      <div class="radio">
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Jacobi-Richardson</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Gauss-Seidel</strong></label>
+
+      <div class="">
+        <h3>Ordem do Sistema</h3>
+        <input class="w3-input w3-border " type="text" placeholder="{{i.length}}" disabled >
+        <br>
+
       </div>
-
-    </form>
-
-    <form class="w3-container">
-      <div class="radio">
-        <h2>Opções adicionais</h2>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Sistema</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" disabled><strong>Determinante</strong></label>
-        <label class="radio-inline" ><input type="radio" name="optradio" disabled><strong>Inversa</strong></label>
-      </div>
-
-    </form>
-
-    <form class="w3-container">
-      <h2>Critérios de Parada</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="Número de iterações (10 até 100)"  ng-model = "">
+      <p><a class="btn btn-primary" ng-click = "addRecipient(i);">Adiciona x[i]   </a>
+        <a class="btn btn-primary" ng-click = "deleteRecipient(i);">Deleta x[i]</a>
+      </p>
       <br>
-      <h2>Tolerância</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="Tolerância (0.001 até 0.000001)"  ng-model = "">
-
-      <br><br>
-
-      <p><a class="btn btn-primary" disabled ng-click = "">Calcular </a>
-        <a class="btn btn-primary" disabled ng-click = "">Limpar</a>
-        <a class="btn btn-primary" disabled ng-click = "">Mostra Gráfico</a>
+      <p><a class="btn btn-primary" ng-click = "triangulo(); tSolution();">Calcular </a>
+        <a class="btn btn-primary" ng-click = "">Limpar</a>
+        <a class="btn btn-primary" ng-click = "">Mostra Gráfico</a>
       </p>
     </form>
     <form class="w3-container">
-    <h2>Dados</h2>
-      <!-- <table>
-        <tr class=""  ng-repeat = "receiver in receivers">
-          <td ><input class="w3-input w3-border " type="text" placeholder="l[i]" ng-model="receiver[0]"></td>
-          <td ><input class="w3-input w3-border " type="text" placeholder="c[i]" ng-model="receiver.column"></td>
+      <h2>Dados</h2>
+      <table class="w3-table-all w3-hoverable">
+        <tr class=""  ng-repeat = "l in i">
+          <td ng-repeat = "m in i"><input class="w3-input w3-border " type="text" placeholder="x[{{m}}]" style="width:100%" ng-model="matrixMain[l][m]"></td>
+          <td><input class="w3-input w3-border " type="text" placeholder="b[{{l}}]" style="width:100%" ng-model="b[l]"></td>
         </tr>
-      </table> -->
-      {{receivers[0][0]}}
+      </table>
+      <h3>X inicial</h3>
+      <table class="w3-table-all w3-hoverable">
+        <tr>
+          <td ng-repeat = "m in i"><input class="w3-input w3-border " type="text" placeholder="Inicial x[{{m}}]" style="width:100%" ng-model="x[m]"></td>
+        </tr>
+      </table>
     </form>
   </div>
   <script src = "../js/sistemas.js"></script>
+
+  <!-- Footer -->
+  <footer class="container-fluid-footer bg-4 text-center">
+    <p>
+      Luis Uzai
+    </p>  <a href="https://github.com/luisuzai"><img class="git" title="Github" src="../img/git.png" alt="" /></a>
+  </footer>
 </body>
 </html>
