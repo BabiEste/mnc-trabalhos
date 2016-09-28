@@ -29,7 +29,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
+        <a class="navbar-brand" href="../index.html">Home/Discas</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -60,7 +60,7 @@
       <input id="" class="w3-input w3-border " type="text" placeholder="0.01 <= ε <= 0.0001"  ng-model = "ep">
       <br>
       <p>
-        <a class="btn btn-primary" ng-click = "">Calcular   </a>
+        <a class="btn btn-primary" ng-click = "jacobiCalculator()">Calcular   </a>
         <a class="btn btn-primary" ng-click = "">Limpa</a>
       </p>
 
@@ -71,7 +71,7 @@
         <a class="btn btn-primary" ng-click = "deleteRecipient()">Deleta x[i] e f[xi]</a>
       </p>
       <br>
-      <table>
+      <table class="w3-table-all w3-hoverable">
 
         <thead>
           <tr>
@@ -82,10 +82,10 @@
           </tr>
         </thead>
         <tr class=""  ng-repeat = "l in i">
-          <td><input class="w3-input w3-border" type="text" placeholder="x[i]" style="width:100%" ng-model="x[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" style="width:100%" ng-model="expression[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" disabled style="width:100%" ng-model="xResul[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="f[xi]" disabled style="width:100%" ng-model="fResul[l]"></td>
+          <td><input class="w3-input w3-border" type="text" placeholder="x[i] inicial" style="width:100%" ng-model="x[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="Função x,y,z (grau ≤ 3)" style="width:100%" ng-model="expression[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="Solução x" disabled style="width:100%" ng-model="xResul[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="Solução f[xi]" disabled style="width:100%" ng-model="fResul[l]"></td>
         </tr>
       </table>
       <br>

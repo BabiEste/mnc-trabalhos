@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
   $scope.expression = '';
-  $scope.delta = 0.5;
+  $scope.delta = 0.1;
   $scope.intervaloImparp=[];
   $scope.intervaloImparq=[];
   $scope.solucao = [];
@@ -86,10 +86,11 @@ app.controller('myCtrl', function($scope) {
   $scope.newton = function(aAux,bAux){
     var p,q,derivate;
     p = aAux;
+    console.log(aAux);
     for (var i = 0; i < 100; i++) {
       q=p;
       derivate = calcular(p);
-      console.log(p);
+      console.log(derivate);
       if(derivate === 0)
       derivate = calcular(p-(-$scope.ep));
       p = p -(math.eval($scope.expression,{x: Number(p)}))/derivate;
