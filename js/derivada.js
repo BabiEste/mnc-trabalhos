@@ -1,10 +1,7 @@
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
-  $scope.expression = '';
-  $scope.expression2= '';
-  $scope.x = '';
-  $scope.y = '';
+  $scope.expression = '';  $scope.expression2= '';  $scope.x = '';  $scope.y = '';
   $scope.n = 1;
   $scope.i=[];
   $scope.m=[];
@@ -21,7 +18,7 @@ app.controller('myCtrl', function($scope) {
   $scope.variables =[];
   $scope.variables[0] ="x";
   $scope.variables[1] ="y";
-  // $scope.variables[2] ="z";
+  $scope.variables[2] ="z";
   $scope.z = '';
   $scope.ep = '';
   $scope.result = [];
@@ -30,8 +27,8 @@ app.controller('myCtrl', function($scope) {
   $scope.variablesX=[];
   $scope.hessiana = [];
   $scope.jacobiFunctions = [];
-  $scope.jacobiFunctions[0] = "sin(x)+sin(y)+sin(z)";
-  $scope.jacobiFunctions[1] = "x*y+x*z+y*z";
+  $scope.jacobiFunctions[0] = "";
+  $scope.jacobiFunctions[1] = "";
   // $scope.jacobiFunctions[2] = "x^3+y*z^2";
   $scope.jacobiVariables = [];
   $scope.jacobiMatrix = [];

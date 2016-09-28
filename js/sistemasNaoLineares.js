@@ -1,28 +1,37 @@
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
-  $scope.i=[];$scope.x=[];$scope.x[0]=0;$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="x^2";$scope.ep=0.01;
-  $scope.jacobiMatrix=[];
+  $scope.i=[];$scope.x=[];$scope.x[0]=1;$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="x^2+y^2-9";$scope.ep=0.01;
+  $scope.jacobiMatrix=[]; $scope.fx=[]; $scope.xAux = [];$scope.expression[1]='x+y-3'; $scope.x[1]=5;$scope.i[1]=1;
 
-  $scope.addRecipient = function() {
-    if($scope.i.length === 0 ){
-    $scope.i.push(0);
-    $scope.j.push(0);
+  $scope.hCalculator = function () {
+    if(document.getElementById("sct").value === "modifi"){
+      console.log("MODIFICADO");
+      $scope.jacobiCalculator();
+      console.log($scope.jacobiMatrix[0]);
+      console.log($scope.jacobiMatrix[1]);
     }
-    else {
-    $scope.i.push($scope.i[($scope.i.length-1)]+1);
+    for(j=0; j<100;j++){
+      if(document.getElementById("sct").value === "newton"){
+      console.log("NEWTON NORMAL");
+        $scope.jacobiCalculator();
+      }
+      for (var i = 0; i < $scope.i.length; i++) {
+        $scope.fx[i] = (-1)*math.eval($scope.expression[i],{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
 
+
+      }
+      $scope.triangulo();
+      console.log($scope.h + "    " + $scope.fx);
+      for (var s = 0; s < $scope.x.length; s++) {
+        $scope.x[s] = ($scope.x[s]-(-$scope.h[s]));
+      }
+      for(var k=0;k<$scope.h.length-1;k++){
+        if(Math.abs($scope.h[k]) < $scope.ep && Math.abs($scope.h[k+1]) < $scope.ep){
+          return true;
+        }
+      }
     }
-    console.log($scope.i[$scope.i.length-1]);
-    console.log($scope.expression[$scope.expression.length-1]);
-  };
-
-  $scope.deleteRecipient = function() {
-    $scope.i.pop();
-
-  };
-  var hCalculator = function () {
-
   };
   $scope.jacobiCalculator = function (){
     for (var j = 0; j < $scope.i.length; j++) {
@@ -30,10 +39,8 @@ app.controller('myCtrl', function($scope) {
       for(var s = 0; s < $scope.i.length ; s++){
         $scope.jacobiMatrix[j][s] = $scope.jacobiParcialPrimeira($scope.expression[j],s);
       }
-        console.log($scope.jacobiMatrix[0]);
-        console.log($scope.jacobiMatrix[1]);
-        console.log($scope.jacobiMatrix[2]);
     }
+
   };
   $scope.jacobiParcialPrimeira = function(expression,what){
     var h = 1000*$scope.ep;
@@ -63,5 +70,67 @@ app.controller('myCtrl', function($scope) {
 
   };
 
-  
+
+  // SISTEMA RESOLVIDO POR GAUSS SIMPLES PARA ACHAR O h
+
+
+  $scope.triangulo = function () {
+    var m;
+    var fx = [];
+    for (var j  = 0; j < $scope.i.length-1; j++) {
+      for (var i = j+1; i < $scope.i.length; i++) {
+        try {
+          m = $scope.jacobiMatrix[i][j]/$scope.jacobiMatrix[j][j];
+        } catch (e) {
+          alert("Error");
+        }
+
+        for (var k = j; k < $scope.i.length; k++) {
+          $scope.jacobiMatrix[i][k] = $scope.jacobiMatrix[i][k] - m*$scope.jacobiMatrix[j][k];
+
+        }
+        $scope.fx[i] = $scope.fx[i] - m*$scope.fx[j];
+      }
+    }
+    $scope.h = tSolution();
+  };
+
+  var tSolution = function(){
+    var x = [],soma =0;
+    x[$scope.i.length - 1] = $scope.fx[$scope.i.length - 1]/$scope.jacobiMatrix[$scope.i.length - 1][ $scope.i.length - 1];
+    for (var i = $scope.i.length - 1; i >=0 ; i--) {
+      soma = 0;
+      for (var j = i+1; j <   $scope.i.length; j++) {
+        soma += $scope.jacobiMatrix[i][j]*x[j];
+      }
+      x[i] = round(($scope.fx[i]-soma)/$scope.jacobiMatrix[i][i]);
+    }
+    return x;
+  };
+
+  var round = function(number){
+    number = number * 10000;
+    if((number - Math.round(number)) <= 0.0001){
+      return Math.round(number)/10000;
+    }
+
+    else return number/10000;
+  };
+
+
+  $scope.addRecipient = function() {
+    if($scope.i.length === 0 ){
+      $scope.i.push(0);
+      $scope.j.push(0);
+    }
+    else {
+      $scope.i.push($scope.i[($scope.i.length-1)]+1);
+
+    }
+  };
+
+  $scope.deleteRecipient = function() {
+    $scope.i.pop();
+
+  };
 });

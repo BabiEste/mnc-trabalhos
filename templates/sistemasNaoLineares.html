@@ -50,17 +50,17 @@
   <div ng-app="myApp" ng-controller="myCtrl">
     <form class="w3-container">
       <h2>Ordem do Sistema</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="2 <= n <= 10"  ng-model = "n">
-      <div class="radio">
-        <label class="radio-inline"><input type="radio" name="optradio" ><strong>Newton</strong></label>
-        <label class="radio-inline"><input type="radio" name="optradio" ><strong>Newton Modificado</strong></label>
-      </div>
+      <input id="" class="w3-input w3-border " type="text" placeholder="{{i.length}}" disabled ng-model = "n">
+      <br>
+      <select id="sct" class="form-control ">
+          <option value="newton" >Newton</option>
+          <option value="modifi" >Newton Modificado</option>
+      </select>
       <h2>Critério de Parada</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="10 <= Iterações <= 100"  ng-model = "iteracoes">
-      <input id="" class="w3-input w3-border " type="text" placeholder="0.01 <= ε <= 0.0001"  ng-model = "ep">
+      <input id="" class="w3-input w3-border " type="text" placeholder="Digite o ε"  ng-model = "ep">
       <br>
       <p>
-        <a class="btn btn-primary" ng-click = "jacobiCalculator()">Calcular   </a>
+        <a class="btn btn-primary" ng-click = "hCalculator();">Calcular   </a>
         <a class="btn btn-primary" ng-click = "">Limpa</a>
       </p>
 
@@ -84,7 +84,7 @@
         <tr class=""  ng-repeat = "l in i">
           <td><input class="w3-input w3-border" type="text" placeholder="x[i] inicial" style="width:100%" ng-model="x[l]"></td>
           <td ><input class="w3-input w3-border" type="text" placeholder="Função x,y,z (grau ≤ 3)" style="width:100%" ng-model="expression[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="Solução x" disabled style="width:100%" ng-model="xResul[l]"></td>
+          <td ><input class="w3-input w3-border" type="text" placeholder="Solução x" disabled style="width:100%" ng-model="x[l]"></td>
           <td ><input class="w3-input w3-border" type="text" placeholder="Solução f[xi]" disabled style="width:100%" ng-model="fResul[l]"></td>
         </tr>
       </table>
