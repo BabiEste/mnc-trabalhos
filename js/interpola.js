@@ -62,9 +62,6 @@ app.controller('myCtrl', function($scope) {
         if(k!== $scope.i.length-1)
         fun+="+";
       }
-      if(isNaN(fun))
-      alert("Digitou letra onde não devia, né?");
-      console.log(fun);
 
       return fun;
     } catch (e) {
