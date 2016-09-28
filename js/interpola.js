@@ -4,7 +4,6 @@ app.controller('myCtrl', function($scope) {
   $scope.n = 1;$scope.x=[];$scope.y=[];$scope.i=[];$scope.i[0]=0;$scope.matrix = [];$scope.expression='';$scope.selecionado='';
 
   $scope.addRecipient = function() {
-
     if($scope.i.length === 0 ){
       $scope.i.push(0);
     }

@@ -29,7 +29,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html">Trabalho de MNC</a>
+        <a class="navbar-brand " href="../index.html">Home/Discas</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -54,17 +54,17 @@
       <h2>Métodos</h2>
       <h3>Diretos</h3>
       <select id="sct" class="form-control ">
-          <option value="linear">Gauss - Simples</option>
-          <option value="newton">Gauss - Pivotamento Parcial</option>
-          <option value="gregory">Gauss - Pivotamento total</option>
-          <option value="linear">Gauss - Compacto</option>
-          <option value="newton">Decomposição L.U</option>
-          <option value="gregory">Cholesky</option>
+          <option value="linear" >Gauss - Simples</option>
+          <option value="newton" disabled>Gauss - Pivotamento Parcial</option>
+          <option value="gregory" disabled>Gauss - Pivotamento total</option>
+          <option value="linear" disabled>Gauss - Compacto</option>
+          <option value="newton" disabled>Decomposição L.U</option>
+          <option value="gregory" disabled>Cholesky</option>
       </select>
       <br><h3>Iterativos</h3>
       <select id="sct2" class="form-control ">
-          <option value="newton">Decomposição L.U</option>
-          <option value="gregory">Cholesky</option>
+          <option value="newton" disabled>Decomposição L.U</option>
+          <option value="gregory" disabled>Cholesky</option>
       </select>
     </form>
 
@@ -82,7 +82,6 @@
       <br>
       <p><a class="btn btn-primary" ng-click = "triangulo(); tSolution();">Calcular </a>
         <a class="btn btn-primary" ng-click = "">Limpar</a>
-        <a class="btn btn-primary" ng-click = "">Mostra Gráfico</a>
       </p>
     </form>
     <form class="w3-container">

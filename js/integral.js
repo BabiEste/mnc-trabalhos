@@ -144,7 +144,7 @@ app.controller('myCtrl', function($scope) {
       var height = 300;
 
       // desired xDomain values
-      var xScale = [-10, 10];
+      var xScale = [-10,10];
 
       functionPlot({
         width: width,
