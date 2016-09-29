@@ -29,7 +29,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand " href="../index.html">Home/Discas</a>
+        <a class="navbar-brand " href="../index.html">Home/Dicas</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -81,7 +81,7 @@
       </p>
       <br>
       <p><a class="btn btn-primary" ng-click = "triangulo(); tSolution();">Calcular </a>
-        <a class="btn btn-primary" ng-click = "">Limpar</a>
+        <a class="btn btn-primary" ng-click = "limpa()">Limpar</a>
       </p>
     </form>
     <form class="w3-container">
@@ -95,7 +95,7 @@
       <h3>X inicial</h3>
       <table class="w3-table-all w3-hoverable">
         <tr>
-          <td ng-repeat = "m in i"><input class="w3-input w3-border " type="text" placeholder="Inicial x[{{m}}]" style="width:100%" ng-model="x[m]"></td>
+          <td ng-repeat = "m in i"><input disabled class="w3-input w3-border " type="text" placeholder="Inicial x[{{m}}]" style="width:100%" ng-model="x[m]"></td>
         </tr>
       </table>
     </form>

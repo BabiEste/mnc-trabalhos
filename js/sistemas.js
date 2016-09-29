@@ -3,18 +3,14 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
   $scope.i=[];$scope.i[0]=0;$scope.i[1]=1;$scope.i[2]=2;$scope.j=[];$scope.j[0]=0;$scope.j[1]=1; $scope.j[2]=2;$scope.j[3]=3;
   $scope.matrixMain = [[],[]];
-  $scope.matrixMain = [[1,2,-1],
-  [2,-1,1],
-  [1,1,1]];
   $scope.b=[];
   $scope.x=[];
-  $scope.b = [2,3,6];
   // TABLE
   $scope.addRecipient = function() {
     if($scope.i.length === 0 ){
       $scope.i.push(0);
     }
-    else {
+    else if($scope.i.length<3){
       $scope.i.push($scope.i[($scope.i.length-1)]+1);
       $scope.j.push($scope.j[($scope.j.length-1)]+1);
 
@@ -23,8 +19,10 @@ app.controller('myCtrl', function($scope) {
   };
 
   $scope.deleteRecipient = function() {
-    $scope.j.pop();
-    $scope.i.pop();
+    if($scope.j.length>1){
+      $scope.j.pop();
+      $scope.i.pop();
+    }
   };
   $scope.triangulo = function () {
     var m;
@@ -68,5 +66,10 @@ app.controller('myCtrl', function($scope) {
     }
 
     else return number/100000;
+  };
+  $scope.limpa =function () {
+    $scope.matrixMain = [[],[]];
+    $scope.b=[];
+    $scope.x=[];
   };
 });

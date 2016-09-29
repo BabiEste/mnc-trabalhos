@@ -79,6 +79,13 @@ app.controller('myCtrl', function($scope) {
 
   $scope.newtonCalculator =function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
+      if(math.eval($scope.expression,{x: Number($scope.intervaloImparp[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparp[i]);
+      }
+      else if(math.eval($scope.expression,{x: Number($scope.intervaloImparq[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparq[i]);
+      }
+    else
       $scope.solucao[i]=round($scope.newton($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
@@ -102,6 +109,13 @@ app.controller('myCtrl', function($scope) {
   };
   $scope.newtonModCalculator =function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
+      if(math.eval($scope.expression,{x: Number($scope.intervaloImparp[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparp[i]);
+      }
+      else if(math.eval($scope.expression,{x: Number($scope.intervaloImparq[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparq[i]);
+      }
+      else
       $scope.solucao[i]=round($scope.newtonMod($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
@@ -134,11 +148,26 @@ app.controller('myCtrl', function($scope) {
 
   $scope.cordasCalculator = function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
+      if(math.eval($scope.expression,{x: Number($scope.intervaloImparp[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparp[i]);
+      }
+      else if(math.eval($scope.expression,{x: Number($scope.intervaloImparq[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparq[i]);
+      }
+      else
       $scope.solucao[i]=round($scope.cordas($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
   $scope.cordasModCalculator = function(){
     for (var i = 0; i < $scope.intervaloImparq.length; i++) {
+      console.log($scope.intervaloImparq[i]);
+      if(math.eval($scope.expression,{x: Number($scope.intervaloImparp[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparp[i]);
+      }
+      else if(math.eval($scope.expression,{x: Number($scope.intervaloImparq[i])})===0){
+        $scope.solucao[i]=round($scope.intervaloImparq[i]);
+      }
+      else
       $scope.solucao[i]=round($scope.cordasModificado($scope.intervaloImparp[i],$scope.intervaloImparq[i]));
     }
   };
@@ -156,13 +185,11 @@ app.controller('myCtrl', function($scope) {
         aAux = p;
         p=map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
       }
-      if((p-0) <= 0.0001 || (bAux - aAux) <= $scope.ep)
+      if((p-0) <= 0.01 || (bAux - aAux) <= $scope.ep)
       return map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
 
       for(var i = 0; i<100; i++) {
-        if((p-0) <= 0.00001 || Math.abs(bAux - aAux) <= $scope.ep || bAux === aAux){
-          return map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
-        }
+
         if ((math.eval($scope.expression,{x: Number(aAux)}) * math.eval($scope.expression,{x: Number(p)})) <= 0 || (math.eval($scope.expression,{x: Number(aAux)}) * math.eval($scope.expression,{x: Number(p)})) < 0.00001){
           bAux = p;
           p=map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
@@ -170,6 +197,10 @@ app.controller('myCtrl', function($scope) {
         else {
           aAux = p;
           p=map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
+        }
+        console.log(p);
+        if((p-0) <= 0.001 || Math.abs(bAux - aAux) <= $scope.ep || bAux === aAux){
+          return map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
         }
         if(i=== 99)
         return p;
@@ -191,7 +222,7 @@ app.controller('myCtrl', function($scope) {
         aAux = p;
         p=map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
       }
-      if((p-0) <= 0.0001 || (bAux - aAux) <= $scope.ep)
+      if((p-0) <= 0.01 || (bAux - aAux) <= $scope.ep)
       return map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
 
       for(var i = 0; i<100; i++) {
@@ -209,7 +240,7 @@ app.controller('myCtrl', function($scope) {
         }
         if(i=== 99)
         return p;
-        if((p-0) <= 0.00001 || Math.abs(bAux - aAux) <= $scope.ep || bAux === aAux){
+        if((p-0) <= 0.001 || Math.abs(bAux - aAux) <= $scope.ep || bAux === aAux){
           return map(aAux,math.eval($scope.expression,{x: Number(bAux)}),bAux,math.eval($scope.expression,{x: Number(aAux)}));
         }
       }

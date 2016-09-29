@@ -32,7 +32,7 @@ app.controller('myCtrl', function($scope) {
   // $scope.jacobiFunctions[2] = "x^3+y*z^2";
   $scope.jacobiVariables = [];
   $scope.jacobiMatrix = [];
-  $scope.ep2 = 0.001;
+  $scope.ep2 = '';
 
   $scope.ep3 = 0.001;
   $scope.jacobiCalculator = function (){
@@ -487,6 +487,39 @@ app.controller('myCtrl', function($scope) {
   };
 
 
-
+  $scope.limpa = function () {
+    $scope.expression = '';  $scope.expression2= '';  $scope.x = '';  $scope.y = '';
+    $scope.n = 1;
+    $scope.i=[];
+    $scope.m=[];
+    $scope.n=[];
+    $scope.i[0]=0;
+    $scope.m[0]=0;
+    $scope.m[1]=1;
+    // $scope.m[2]=2;
+    $scope.n[0]=0;
+    $scope.n[1]=1;
+    // $scope.n[2]=2;
+    $scope.i[1]=1;
+    // $scope.i[2]=2;
+    $scope.variables =[];
+    $scope.variables[0] ="x";
+    $scope.variables[1] ="y";
+    $scope.variables[2] ="z";
+    $scope.z = '';
+    $scope.ep = '';
+    $scope.result = [];
+    $scope.ep2 = '';
+    $scope.grad = [];
+    $scope.variablesX=[];
+    $scope.hessiana = [];
+    $scope.jacobiFunctions = [];
+    $scope.jacobiFunctions[0] = "";
+    $scope.jacobiFunctions[1] = "";
+    // $scope.jacobiFunctions[2] = "x^3+y*z^2";
+    $scope.jacobiVariables = [];
+    $scope.jacobiMatrix = [];
+    $scope.ep2 = '';
+  };
 
 });

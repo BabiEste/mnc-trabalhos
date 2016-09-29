@@ -1,36 +1,65 @@
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
-  $scope.i=[];$scope.x=[];$scope.x[0]=1;$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="x^2+y^2-9";$scope.ep=0.01;
-  $scope.jacobiMatrix=[]; $scope.fx=[]; $scope.xAux = [];$scope.expression[1]='x+y-3'; $scope.x[1]=5;$scope.i[1]=1;
+  $scope.i=[];$scope.x=[];$scope.x[0]='';$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="";$scope.ep='';
+  $scope.jacobiMatrix=[]; $scope.fx=[]; $scope.xAux = [];$scope.expression[1]=''; $scope.x[1]='';$scope.i[1]=1;
+  var round = function(number){
+    number = number * 10000;
+    if((number - Math.round(number)) <= 0.0001){
+      return Math.round(number)/10000;
+    }
 
+    else return number/10000;
+  };
+  var arruma = function () {
+    for (var i = 0; i < $scope.x.length; i++) {
+      $scope.x[i]= round($scope.x[i]);
+    }
+  };
   $scope.hCalculator = function () {
+
+    if(isNaN($scope.ep)){
+      alert("Digitou letra onde não devia, né?");
+      return false;
+    }
     if(document.getElementById("sct").value === "modifi"){
       console.log("MODIFICADO");
       $scope.jacobiCalculator();
       console.log($scope.jacobiMatrix[0]);
       console.log($scope.jacobiMatrix[1]);
     }
-    for(j=0; j<100;j++){
-      if(document.getElementById("sct").value === "newton"){
-      console.log("NEWTON NORMAL");
+    try {
+      for(j=0; j<100;j++){
+        if(document.getElementById("sct").value === "newton"){
+          console.log("NEWTON NORMAL");
+          $scope.jacobiCalculator();
+        }
+        if(document.getElementById("sct").value === "modifi" && j%5 ===0){
         $scope.jacobiCalculator();
-      }
-      for (var i = 0; i < $scope.i.length; i++) {
-        $scope.fx[i] = (-1)*math.eval($scope.expression[i],{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
+        }
+        for (var i = 0; i < $scope.i.length; i++) {
+          $scope.fx[i] = (-1)*math.eval($scope.expression[i],{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
 
 
-      }
-      $scope.triangulo();
-      console.log($scope.h + "    " + $scope.fx);
-      for (var s = 0; s < $scope.x.length; s++) {
-        $scope.x[s] = ($scope.x[s]-(-$scope.h[s]));
-      }
-      for(var k=0;k<$scope.h.length-1;k++){
-        if(Math.abs($scope.h[k]) < $scope.ep && Math.abs($scope.h[k+1]) < $scope.ep){
-          return true;
+        }
+        $scope.triangulo();
+        console.log($scope.h + "    " + $scope.fx);
+        for (var s = 0; s < $scope.x.length; s++) {
+          $scope.x[s] = ($scope.x[s]-(-$scope.h[s]));
+          if (isNaN($scope.x[s])) {
+            alert("Deu algo errado!");
+            return false;
+          }
+        }
+        for(var k=0;k<$scope.h.length-1;k++){
+          if(Math.abs($scope.h[k]) < $scope.ep && Math.abs($scope.h[k+1]) < $scope.ep){
+            arruma();
+            return true;
+          }
         }
       }
+    } catch (e) {
+      alert("Algo de errado não está certo!");
     }
   };
   $scope.jacobiCalculator = function (){
@@ -50,15 +79,28 @@ app.controller('myCtrl', function($scope) {
     f1 = math.eval(expression,{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
     $scope.x[what] = xi-h;
     f2 = math.eval(expression,{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
-    p = (f1-f2)/(2*h);
+    try {
+      p = (f1-f2)/(2*h);
+    } catch (e) {
+      alert("Tem algo errado!");
+    }
+
     for (var j = 0; j < 10; j++) {
       q = p;
-      h = h/2;
+      try {
+        h = h/2;
+      } catch (e) {
+        alert("Tem algo errado!");
+      }
       $scope.x[what] = xi-(-h);
       f1 = math.eval(expression,{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
       $scope.x[what] = xi-h;
       f2 = math.eval(expression,{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
-      p = (f1-f2)/(2*h);
+      try {
+        p = (f1-f2)/(2*h);
+      } catch (e) {
+      alert("Deu algo errado!");
+      }
       if(Math.abs(p-q)<=$scope.ep){
         $scope.x[what]=xi;
         return p;
@@ -108,14 +150,7 @@ app.controller('myCtrl', function($scope) {
     return x;
   };
 
-  var round = function(number){
-    number = number * 10000;
-    if((number - Math.round(number)) <= 0.0001){
-      return Math.round(number)/10000;
-    }
 
-    else return number/10000;
-  };
 
 
   $scope.addRecipient = function() {
@@ -123,13 +158,14 @@ app.controller('myCtrl', function($scope) {
       $scope.i.push(0);
       $scope.j.push(0);
     }
-    else {
+    else if($scope.i.length <5){
       $scope.i.push($scope.i[($scope.i.length-1)]+1);
 
     }
   };
 
   $scope.deleteRecipient = function() {
+    if($scope.i.length>1)
     $scope.i.pop();
 
   };
