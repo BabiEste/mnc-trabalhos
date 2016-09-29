@@ -27,9 +27,12 @@ app.controller('myCtrl', function($scope) {
     for (var i = 0; i < $scope.x.length; i++) {
       if(i===0)
       fun+=deltay[i][0]+"+(x-"+$scope.x[i]+")*";
-      else{
+      else if(i!==($scope.x.length-1)){
       fun+="("+deltay[i][0]+"+(x-"+$scope.x[i]+")";
 
+      }
+      else {
+        fun+="("+deltay[i][0];
       }
       if(i!==($scope.x.length -1) && i!== 0)
       fun+="*";
