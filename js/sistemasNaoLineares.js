@@ -3,7 +3,19 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
   $scope.i=[];$scope.x=[];$scope.x[0]='';$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="";$scope.ep='';
   $scope.jacobiMatrix=[]; $scope.fx=[]; $scope.xAux = [];$scope.expression[1]=''; $scope.x[1]='';$scope.i[1]=1;
+  var round = function(number){
+    number = number * 10000;
+    if((number - Math.round(number)) <= 0.0001){
+      return Math.round(number)/10000;
+    }
 
+    else return number/10000;
+  };
+  var arruma = function () {
+    for (var i = 0; i < $scope.x.length; i++) {
+      $scope.x[i]= round($scope.x[i]);
+    }
+  };
   $scope.hCalculator = function () {
 
     if(isNaN($scope.ep)){
@@ -22,6 +34,9 @@ app.controller('myCtrl', function($scope) {
           console.log("NEWTON NORMAL");
           $scope.jacobiCalculator();
         }
+        if(document.getElementById("sct").value === "modifi" && j%5 ===0){
+        $scope.jacobiCalculator();
+        }
         for (var i = 0; i < $scope.i.length; i++) {
           $scope.fx[i] = (-1)*math.eval($scope.expression[i],{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
 
@@ -38,6 +53,7 @@ app.controller('myCtrl', function($scope) {
         }
         for(var k=0;k<$scope.h.length-1;k++){
           if(Math.abs($scope.h[k]) < $scope.ep && Math.abs($scope.h[k+1]) < $scope.ep){
+            arruma();
             return true;
           }
         }
@@ -134,14 +150,7 @@ app.controller('myCtrl', function($scope) {
     return x;
   };
 
-  var round = function(number){
-    number = number * 10000;
-    if((number - Math.round(number)) <= 0.0001){
-      return Math.round(number)/10000;
-    }
 
-    else return number/10000;
-  };
 
 
   $scope.addRecipient = function() {

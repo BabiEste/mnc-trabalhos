@@ -2,22 +2,38 @@ var app = angular.module('myApp', []);
 
 var x = [];
 app.controller('myCtrl', function($scope) {
+  var verifica = function () {
+    if(a>b){
+      alert("a tem que ser menor que b");
+      return false;
+    }
+    return true;
+  };
   $scope.Trapezio = function(what){
+    if(verifica() === false){
+      return "";
+    }
     var h = ($scope.b-$scope.a)/$scope.n;
     var trapezio1=0, trapezio2=0;
     var trapezioMain = 0;
     console.log(h);
     for (var i = 0; i <= $scope.n ; i++) {
       x.push(Number($scope.a) + i*h);
+      try {
 
-      if(i < $scope.n)
-      trapezio1 += math.eval($scope.expression,{x: Number(x[i])});
 
-      if(i>0)
-      trapezio2 += math.eval($scope.expression,{x: Number(x[i])});
+        if(i < $scope.n)
+        trapezio1 += math.eval($scope.expression,{x: Number(x[i])});
 
-      if(i>0 && i<$scope.n)
-      trapezioMain += math.eval($scope.expression,{x: Number(x[i])});
+        if(i>0)
+        trapezio2 += math.eval($scope.expression,{x: Number(x[i])});
+
+        if(i>0 && i<$scope.n)
+        trapezioMain += math.eval($scope.expression,{x: Number(x[i])});
+      } catch (e) {
+        alert("Algo deu errado");
+        return;
+      }
     }
 
     trapezio2 = trapezio2*h;
@@ -25,10 +41,16 @@ app.controller('myCtrl', function($scope) {
 
     trapezio1 = trapezio1*h;
     $scope.trapezio1Resultado= trapezio1;
+    try {
 
-    var xZero=math.eval($scope.expression,{x: Number(x[0])});
-    var xN = math.eval($scope.expression,{x: Number(x[$scope.n])});
-    trapezioMain = (xZero+(2*trapezioMain)+xN)*(h/2);
+
+      var xZero=math.eval($scope.expression,{x: Number(x[0])});
+      var xN = math.eval($scope.expression,{x: Number(x[$scope.n])});
+      trapezioMain = (xZero+(2*trapezioMain)+xN)*(h/2);
+    } catch (e) {
+      alert("Algo deu muito errado. Divisão por zero?");
+      return;
+    }
     console.log(trapezio1);
     console.log(trapezio2);
     for (var q = 0; q <= $scope.n; q++) {
@@ -49,17 +71,27 @@ app.controller('myCtrl', function($scope) {
   };
 
   $scope.simpsonOne = function(){
+    if(verifica() === false){
+      return "";
+    }
     var h = ($scope.b-$scope.a)/$scope.n;
     var somaUm = 0 , somaDois = 0 ;
     var resultado = 0;
     var boo = false;
     if ($scope.n%2 !== 0) {
-      var x0Aux = math.eval($scope.expression,{x: Number($scope.b-h)});
-      var xnAux = math.eval($scope.expression,{x: Number($scope.b)});
-      var aux = (h/2)*(x0Aux+xnAux);
-      $scope.n = $scope.n -1;
-      resultado = resultado + aux;
-      boo = true;
+      try {
+
+
+        var x0Aux = math.eval($scope.expression,{x: Number($scope.b-h)});
+        var xnAux = math.eval($scope.expression,{x: Number($scope.b)});
+        var aux = (h/2)*(x0Aux+xnAux);
+        $scope.n = $scope.n -1;
+        resultado = resultado + aux;
+        boo = true;
+      } catch (e) {
+        alert("Algo deu muito errado");
+        return;
+      }
     }
     console.log(h);
     for (var i = 0; i <= $scope.n ; i++) {
@@ -71,12 +103,17 @@ app.controller('myCtrl', function($scope) {
       somaDois += math.eval($scope.expression,{x: Number(x[i])});
       console.log("["+i+"]" + math.eval($scope.expression,{x: Number(x[i])}));
     }
+    try {
 
-    var fxZero=math.eval($scope.expression,{x: Number(x[0])});
-    var fxN = math.eval($scope.expression,{x: Number(x[$scope.n])});
-    somaUm = 4*somaUm;
-    somaDois = 2*somaDois;
-    resultado =resultado+((h/3)*(fxZero+(somaUm)+(somaDois)+fxN));
+      var fxZero=math.eval($scope.expression,{x: Number(x[0])});
+      var fxN = math.eval($scope.expression,{x: Number(x[$scope.n])});
+      somaUm = 4*somaUm;
+      somaDois = 2*somaDois;
+      resultado =resultado+((h/3)*(fxZero+(somaUm)+(somaDois)+fxN));
+    }
+    catch (e) {
+      alert(e);
+    }
     for (var q = 0; q <= $scope.n; q++) {
       x.pop();
     }
@@ -88,6 +125,9 @@ app.controller('myCtrl', function($scope) {
   };
 
   $scope.simpsonThree = function(){
+    if(verifica() === false){
+      return "";
+    }
     var boo = false;
     if ($scope.n%3 !== 0) {
       $scope.n = 3*$scope.n;
@@ -108,13 +148,17 @@ app.controller('myCtrl', function($scope) {
       somaUm += math.eval($scope.expression,{x: Number(x[i])});
       console.log("["+i+"]" + math.eval($scope.expression,{x: Number(x[i])}));
     }
+    try {
 
-    var fxZero=math.eval($scope.expression,{x: Number(x[0])});
-    var fxN = math.eval($scope.expression,{x: Number(x[$scope.n])});
-    somaUm = 3*somaUm;
-    somaDois = 2*somaDois;
-    resultado =resultado+(3*(h/8)*(fxZero+(somaUm)+(somaDois)+fxN));
 
+      var fxZero=math.eval($scope.expression,{x: Number(x[0])});
+      var fxN = math.eval($scope.expression,{x: Number(x[$scope.n])});
+      somaUm = 3*somaUm;
+      somaDois = 2*somaDois;
+      resultado =resultado+(3*(h/8)*(fxZero+(somaUm)+(somaDois)+fxN));
+    } catch (e) {
+      alert(e);
+    }
     if (boo === true) {
       $scope.n = $scope.n/3;
     }
@@ -133,10 +177,10 @@ app.controller('myCtrl', function($scope) {
     console.log(x[0]);
   };
   function computeYScale (width, height, xScale) {
-  var xDiff = xScale[1] - xScale[0];
-  var yDiff = height * xDiff / width;
-  return [-yDiff / 2, yDiff / 2];
-}
+    var xDiff = xScale[1] - xScale[0];
+    var yDiff = height * xDiff / width;
+    return [-yDiff / 2, yDiff / 2];
+  }
   $scope.plot = function(){
     //Desenha o gráfico
     try {
