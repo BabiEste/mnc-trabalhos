@@ -3,7 +3,7 @@ var app = angular.module('myApp', []);
 var x = [];
 app.controller('myCtrl', function($scope) {
   var verifica = function () {
-    if(a>b){
+    if($scope.a>$scope.b){
       alert("a tem que ser menor que b");
       return false;
     }

@@ -56,12 +56,11 @@
           <option value="newton" >Newton</option>
           <option value="modifi" >Newton Modificado</option>
       </select>
-      <h2>Critério de Parada</h2>
-      <input id="" class="w3-input w3-border " type="text" placeholder="Digite o ε"  ng-model = "ep">
+
       <br>
       <p>
         <a class="btn btn-primary" ng-click = "hCalculator();">Calcular   </a>
-        <a class="btn btn-primary" ng-click = "">Limpa</a>
+        <a class="btn btn-primary" ng-click = "limpa()">Limpa</a>
       </p>
 
 
@@ -70,22 +69,20 @@
       <p><a class="btn btn-primary" ng-click = "addRecipient()">Adiciona x[i] e f[xi] </a>
         <a class="btn btn-primary" ng-click = "deleteRecipient()">Deleta x[i] e f[xi]</a>
       </p>
+      <h2>Critério de Parada</h2>
+      <input id="" class="w3-input w3-border " type="text" placeholder="Digite o ε"  ng-model = "ep">
       <br>
       <table class="w3-table-all w3-hoverable">
 
         <thead>
           <tr>
-            <th>x[i] inicial</th>
+            <th>x[i]</th>
             <th>f[i](x)</th>
-            <th>x[i] Final</th>
-            <th>f[i](x) Final</th>
           </tr>
         </thead>
         <tr class=""  ng-repeat = "l in i">
-          <td><input class="w3-input w3-border" type="text" placeholder="x[i] inicial" style="width:100%" ng-model="x[l]"></td>
+          <td><input class="w3-input w3-border" type="text" placeholder="x[i]" style="width:100%" ng-model="x[l]"></td>
           <td ><input class="w3-input w3-border" type="text" placeholder="Função x,y,z (grau ≤ 3)" style="width:100%" ng-model="expression[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="Solução x" disabled style="width:100%" ng-model="x[l]"></td>
-          <td ><input class="w3-input w3-border" type="text" placeholder="Solução f[xi]" disabled style="width:100%" ng-model="fResul[l]"></td>
         </tr>
       </table>
       <br>

@@ -95,7 +95,7 @@
       <h2>Valores de x, y e z</h2>
       <table class="w3-table-all w3-hoverable">
         <tr >
-          <td class=""  ng-repeat = "l in i"><input class="w3-input w3-border " type="text" placeholder="{{variables[l]}}" style="width:40%" ng-model="variablesX[l]"></td>
+          <td class=""  ng-repeat = "l in i"><input class="w3-input w3-border " type="text" placeholder="{{variables[l]}}" style="width:100%" ng-model="variablesX[l]"></td>
 
         </tr>
       </table>
@@ -103,14 +103,14 @@
       <h2>Gradiente</h2>
       <table class="w3-table-all w3-hoverable">
         <tr>
-          <td class=""  ng-repeat = "s in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:40%" ng-model="grad[s]"></td>
+          <td class=""  ng-repeat = "s in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:100%" ng-model="grad[s]"></td>
         </tr>
       </table>
       <br><br>
       <h2>Hessiana</h2>
       <table class="w3-table w3-hoverable">
         <tr ng-repeat = "l in i">
-          <td class=""  ng-repeat = "m in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:40%" ng-model = "hessiana[l][m]"></td>
+          <td class=""  ng-repeat = "m in i"><input class="w3-input w3-border " type="text" disabled placeholder="{{result[s]}}" style="width:100%" ng-model = "hessiana[l][m]"></td>
         </tr>
       </table>
     </form>
@@ -134,7 +134,7 @@
       <h2>Variáveis</h2>
       <table class="w3-table w3-hoverable">
         <tr class="">
-          <td  ng-repeat = "l in m"><input class="w3-input w3-border " type="text" style="width:40%" placeholder="{{variables[l]}}" ng-model="jacobiVariables[l]"></td>
+          <td  ng-repeat = "l in m"><input class="w3-input w3-border " type="text" style="width:100%" placeholder="{{variables[l]}}" ng-model="jacobiVariables[l]"></td>
         </tr>
       </table>
 
@@ -151,7 +151,7 @@
       <table class="w3-table w3-hoverable">
         <tr ng-repeat="l in n">
           <td ng-repeat="s in n">
-            <input class="w3-input w3-border " type="text" placeholder="" style="width:40%" disabled ng-model="jacobiMatrix[l][s]">
+            <input class="w3-input w3-border " type="text" placeholder="" style="width:100%" disabled ng-model="jacobiMatrix[l][s]">
 
           </td>
         </tr>
