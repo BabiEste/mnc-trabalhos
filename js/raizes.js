@@ -292,7 +292,15 @@ app.controller('myCtrl', function($scope) {
     else return number/100000;
   };
 
-
+  $scope.limpa = function () {
+    $scope.expression = '';
+    $scope.delta = 0.1;
+    $scope.intervaloImparp=[];
+    $scope.intervaloImparq=[];
+    $scope.solucao = [];
+    $scope.ep ='';
+    $scope.a=''; $scope.b='';
+  };
   var calcular = function(xFuncao) {
     var x = xFuncao;
     var resultadoFuncao, x1,x2,q,p,resultado1,resultado2,resultadoFalso,h;

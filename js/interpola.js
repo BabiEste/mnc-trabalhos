@@ -17,7 +17,7 @@ app.controller('myCtrl', function($scope) {
         deltay[j][k]=(deltay[j-1][k+1]-deltay[j-1][k])/($scope.x[k+j]-$scope.x[k]);
       }
       itera--;
-    console.log(deltay[j]);
+      console.log(deltay[j]);
     }
     return monta1();
   };
@@ -28,7 +28,7 @@ app.controller('myCtrl', function($scope) {
       if(i===0)
       fun+=deltay[i][0]+"+(x-"+$scope.x[i]+")*";
       else if(i!==($scope.x.length-1)){
-      fun+="("+deltay[i][0]+"+(x-"+$scope.x[i]+")";
+        fun+="("+deltay[i][0]+"+(x-"+$scope.x[i]+")";
 
       }
       else {
@@ -44,7 +44,7 @@ app.controller('myCtrl', function($scope) {
     }
     console.log(fun);
     return fun;
-    };
+  };
 
   var newtongreg = function () {
     deltay[0]=[];
@@ -58,14 +58,14 @@ app.controller('myCtrl', function($scope) {
       for (var k = 0; k < itera; k++) {
         deltay[j][k]=(deltay[j-1][k+1]-deltay[j-1][k]);
       }
-        console.log(deltay[j]);
+      console.log(deltay[j]);
       itera--;
     }
     return monta2();
   };
   var fat = function (x) {
     if(x===0 || x===0)
-      return 1;
+    return 1;
     return x*fat(x-1);
   };
   var monta2 = function () {
@@ -79,21 +79,21 @@ app.controller('myCtrl', function($scope) {
       try {
 
 
-      if(i===0)
-      fun+=deltay[i][0]+"+(x-"+$scope.x[i]+")*";
-      else if(i!==($scope.x.length -1)){
-      fun+="("+"("+deltay[i][0]+")/"+"("+aux+"*"+h+"^"+i+")"+"+(x-"+$scope.x[i]+")";
+        if(i===0)
+        fun+=deltay[i][0]+"+(x-"+$scope.x[i]+")*";
+        else if(i!==($scope.x.length -1)){
+          fun+="("+"("+deltay[i][0]+")/"+"("+aux+"*"+h+"^"+i+")"+"+(x-"+$scope.x[i]+")";
 
+        }
+        else {
+          fun+="("+"("+deltay[i][0]+")/"+"("+aux+"*"+h+"^"+i+")";
+        }
+        if(i!==($scope.x.length -1) && i!== 0)
+        fun+="*";
+      } catch (e) {
+        alert("Algo deu errado");
+        return "";
       }
-      else {
-        fun+="("+"("+deltay[i][0]+")/"+"("+aux+"*"+h+"^"+i+")";
-      }
-      if(i!==($scope.x.length -1) && i!== 0)
-      fun+="*";
-    } catch (e) {
-      alert("Algo deu errado");
-      return "";
-    }
       if(i===$scope.x.length-1) {
         for (var j = 0; j < $scope.x.length-1; j++) {
           fun+=")";
@@ -102,13 +102,13 @@ app.controller('myCtrl', function($scope) {
     }
     // console.log(fun);
     return fun;
-    };
+  };
 
   $scope.addRecipient = function() {
     if($scope.i.length === 0 ){
       $scope.i.push(0);
     }
-    else {
+    else if($scope.i.length <10){
       $scope.i.push($scope.i[($scope.i.length-1)]+1);
 
     }
@@ -123,19 +123,19 @@ app.controller('myCtrl', function($scope) {
     $scope.n--;
   };
   $scope.what = function(){
-      console.log($scope.selecionado);
-      if(document.getElementById("sct").value === "linear"){
-        console.log("sucesso");
-        return completaMatrix();
-      }
-      else if(document.getElementById("sct").value === "newton"){
-        console.log("sucesso");
-        return newton();
-      }
-      else if(document.getElementById("sct").value === "gregory"){
-        console.log("sucesso");
-        return newtongreg();
-      }
+    console.log($scope.selecionado);
+    if(document.getElementById("sct").value === "linear"){
+      console.log("sucesso");
+      return completaMatrix();
+    }
+    else if(document.getElementById("sct").value === "newton"){
+      console.log("sucesso");
+      return newton();
+    }
+    else if(document.getElementById("sct").value === "gregory"){
+      console.log("sucesso");
+      return newtongreg();
+    }
 
 
   };
@@ -153,11 +153,10 @@ app.controller('myCtrl', function($scope) {
           else {
             $scope.matrix[i][j] = $scope.x[i]*$scope.matrix[i][j-1];
           }
-        if(isNaN($scope.matrix) || isNaN($scope.x[i])){
-        alert("Algo está muito errado");
-        $scope.limpa();
-        return;
-        }
+          if(isNaN($scope.matrix[i][j]) || isNaN($scope.x[i])){
+            alert("Algo está muito errado");
+            return;
+          }
         }
       }
       console.log($scope.matrix[0]);
@@ -190,7 +189,7 @@ app.controller('myCtrl', function($scope) {
     for (var j  = 0; j < $scope.i.length-1; j++) {
       yAux[j] = $scope.y[j];
       if (j === ($scope.i.length-2)) {
-      yAux[j+1]=$scope.y[j+1];
+        yAux[j+1]=$scope.y[j+1];
       }
       for (var i = j+1; i < $scope.i.length; i++) {
         try {
@@ -219,11 +218,11 @@ app.controller('myCtrl', function($scope) {
         soma += $scope.matrix[i][j]*x[j];
       }
       try {
-      x[i] = round(($scope.y[i]-soma)/$scope.matrix[i][i]);
+        x[i] = round(($scope.y[i]-soma)/$scope.matrix[i][i]);
 
       } catch (e) {
-      alert("Divisão por zero");
-      return;
+        alert("Divisão por zero");
+        return;
       }
     }
     console.log(x);
@@ -239,7 +238,9 @@ app.controller('myCtrl', function($scope) {
     else return number/100000;
   };
   $scope.limpa = function () {
-    $scope.x=[];$scope.y=[];$scope.i=[];$scope.i[0]=0;$scope.matrix = [];$scope.expression='';$scope.selecionado='';
+    $scope.n = 1;$scope.x=[];$scope.y=[];$scope.i=[];$scope.i[0]=0;$scope.matrix = [];$scope.expression='';$scope.selecionado='';
+    var deltay = [];
+    var xAux=[],yAux=[];
   };
 
   function computeYScale (width, height, xScale) {

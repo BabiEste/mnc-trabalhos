@@ -20,7 +20,7 @@ app.controller('myCtrl', function($scope) {
 
     if(isNaN($scope.ep)){
       alert("Digitou letra onde não devia, né?");
-      return false;
+      return;
     }
     if(document.getElementById("sct").value === "modifi"){
       console.log("MODIFICADO");
@@ -46,9 +46,10 @@ app.controller('myCtrl', function($scope) {
         console.log($scope.h + "    " + $scope.fx);
         for (var s = 0; s < $scope.x.length; s++) {
           $scope.x[s] = ($scope.x[s]-(-$scope.h[s]));
-          if (isNaN($scope.x[s])) {
+          if (isNaN($scope.x[s]) || !isFinite($scope.x[s])) {
             alert("Deu algo errado!");
-            return false;
+            $scope.limpa();
+            return;
           }
         }
         for(var k=0;k<$scope.h.length-1;k++){
@@ -90,7 +91,9 @@ app.controller('myCtrl', function($scope) {
       try {
         h = h/2;
       } catch (e) {
+        $scope.limpa();
         alert("Tem algo errado!");
+        return;
       }
       $scope.x[what] = xi-(-h);
       f1 = math.eval(expression,{x: Number($scope.x[0]),y: Number($scope.x[1]),z: Number($scope.x[2])});
@@ -99,7 +102,9 @@ app.controller('myCtrl', function($scope) {
       try {
         p = (f1-f2)/(2*h);
       } catch (e) {
+      $scope.limpa();
       alert("Deu algo errado!");
+      return;
       }
       if(Math.abs(p-q)<=$scope.ep){
         $scope.x[what]=xi;
@@ -124,7 +129,9 @@ app.controller('myCtrl', function($scope) {
         try {
           m = $scope.jacobiMatrix[i][j]/$scope.jacobiMatrix[j][j];
         } catch (e) {
+          $scope.limpa();
           alert("Error");
+          return;
         }
 
         for (var k = j; k < $scope.i.length; k++) {
@@ -139,19 +146,37 @@ app.controller('myCtrl', function($scope) {
 
   var tSolution = function(){
     var x = [],soma =0;
+
     x[$scope.i.length - 1] = $scope.fx[$scope.i.length - 1]/$scope.jacobiMatrix[$scope.i.length - 1][ $scope.i.length - 1];
+
+    if(!isFinite(x[$scope.i.length - 1] ) || isNaN(x[$scope.i.length - 1] )){
+      alert("Divisão por zero ou algo deu muito errado");
+      $scope.limpa();
+      return;
+    }
+
     for (var i = $scope.i.length - 1; i >=0 ; i--) {
       soma = 0;
       for (var j = i+1; j <   $scope.i.length; j++) {
         soma += $scope.jacobiMatrix[i][j]*x[j];
       }
+      try {
       x[i] = round(($scope.fx[i]-soma)/$scope.jacobiMatrix[i][i]);
+
+      } catch (e) {
+      alert("Divisão por zero");
+      $scope.limpa();
+      return;
+      }
     }
     return x;
   };
 
 
-
+  $scope.limpa = function () {
+    $scope.i=[];$scope.x=[];$scope.x[0]='';$scope.i[0]=0;$scope.expression=[]; $scope.j=[];$scope.j[0]=0;$scope.expression[0]="";$scope.ep='';
+    $scope.jacobiMatrix=[]; $scope.fx=[]; $scope.xAux = [];$scope.expression[1]=''; $scope.x[1]='';$scope.i[1]=1;
+  };
 
   $scope.addRecipient = function() {
     if($scope.i.length === 0 ){
@@ -165,7 +190,7 @@ app.controller('myCtrl', function($scope) {
   };
 
   $scope.deleteRecipient = function() {
-    if($scope.i.length>1)
+    if($scope.i.length>2)
     $scope.i.pop();
 
   };
