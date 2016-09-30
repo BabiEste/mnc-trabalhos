@@ -195,7 +195,7 @@ app.controller('myCtrl', function($scope) {
 
   $scope.Gradiente = function(){
     $scope.resultadoFuncaoVaria = math.eval($scope.expression2,{x: Number($scope.variablesX[0]),y: Number($scope.variablesX[1]),z: Number($scope.variablesX[2])});
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < $scope.variablesX.length; i++) {
       $scope.grad[i] = $scope.derivadaParcialPrimeira($scope.expression2,i);
     }
   };
