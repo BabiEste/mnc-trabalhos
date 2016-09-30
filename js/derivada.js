@@ -219,6 +219,7 @@ app.controller('myCtrl', function($scope) {
       try {
         if(isNaN($scope.variablesX[what])){
           alert("Lembrou de digitar o valor das variáveis?");
+          return;
         }
         q = p;
         h = h/2;
